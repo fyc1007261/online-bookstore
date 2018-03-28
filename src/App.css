@@ -30,9 +30,9 @@
 table{
     align-content: center;
     width: 150vmin;
-    float: top;
+    float: left;
     margin-left: 30vmin;
-    margin-top: 10vmin;
+    margin-top: 0vmin;
     font-family: verdana,arial,sans-serif;
     font-size: 2.5vmin;
     color:#333333;
