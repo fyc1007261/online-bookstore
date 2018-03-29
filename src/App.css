@@ -29,9 +29,9 @@
 
 table{
     align-content: center;
-    width: 150vmin;
+    width: 120vmin;
     float: left;
-    margin-left: 30vmin;
+    margin-left: 15vmin;
     margin-top: 0vmin;
     font-family: verdana,arial,sans-serif;
     font-size: 2.5vmin;
@@ -41,7 +41,7 @@ table{
 }
 tr {
     border-width: 0.2vmin;
-    padding: 8px;
+    padding: 1vmin;
     border-style: solid;
     border-color: #666666;
     background-color: #dedede;
@@ -49,7 +49,7 @@ tr {
 td {
     text-align: left;
     border-width: 0.2vmin;
-    padding: 8px;
+    padding: 1vmin;
     border-style: solid;
     border-color: #666666;
     background-color: #ffffff;
@@ -57,7 +57,7 @@ td {
 th {
     text-align: left;
     border-width: 0.2vmin;
-    padding: 8px;
+    padding: 1vmin;
     border-style: solid;
     border-color: #666666;
     background-color: #ffffff;
@@ -69,11 +69,37 @@ th {
     float: left;
     width:20vmin;
     height: 4.5vmin;
-    margin-left: 30vmin;
+    margin-left: 15vmin;
 }
 .inputFilter{
     float: left;
     margin-left: 0vmin;
     height: 3.6vmin;
     margin-bottom: 0.4vmin;
+}
+.savebut{
+    width: 25vmin;
+    height: 4.5vmin;
+    backgroundColor: lightgrey;
+    border: yellow;
+    color: black;
+    align: center;
+    display: inline-block;
+    font-size: 2.5vmin;
+}
+.Selector{
+    background-color: #dedede;
+    font-size: 3vmin;
+    text-align: center;
+    padding-left: 2vmin;
+    width:20vmin;
+    height: 4.5vmin;
+}
+.Abs{
+    background-color: #dedede;
+    font-size: 3vmin;
+    text-align: center;
+    padding-left: 2vmin;
+    width:200vmin;
+    height: 400.5vmin;
 }

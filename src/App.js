@@ -3,13 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 
 let data=[
-    {'Name' : '他改变了中国', 'Author': '罗伯特·劳伦斯·库恩',
+    {'Name' : '他改变了中国', 'Author': '罗伯特·劳伦斯·库恩', 'Price' : '100.00',
         'Language': 'Traditional Chinese', 'Sales': '100000'},
-    {'Name' : 'CS:APP', 'Author': 'Bryant, R.E',
+    {'Name' : 'CS:APP', 'Author': 'Bryant, R.E', 'Price' : '159.95',
         'Language': 'English', 'Sales': '10000'},
-    {'Name' : '蛙', 'Author': '莫言',
+    {'Name' : '蛙', 'Author': '莫言', 'Price' : '39.80',
         'Language': 'Simplified Chinese', 'Sales': '1000'},
-    {'Name' : '三国演义', 'Author': '罗贯中',
+    {'Name' : '三国演义', 'Author': '罗贯中', 'Price' : '65.00',
         'Language': 'Traditional Chinese', 'Sales': '50000'},
 ];
 
@@ -25,12 +25,12 @@ function Msg (props) {
             "display": "inline-block",
             "font-size": "3vmin",
         };
-
         return (
             <table>
                 <th><button style={style} onClick={props.BookClick}>Book</button></th>
                 <th><button style={style} onClick={props.AuthorClick}>Author</button></th>
                 <th><button style={style} onClick={props.LangClick}>Language</button></th>
+                <th><button style={style} onClick={props.PriceClick}>Price</button></th>
                 <th><button style={style} onClick={props.SalesClick}>Sales</button></th>
                 <tbody>
                 {props.value}
@@ -38,6 +38,18 @@ function Msg (props) {
             </table>
         );
 }
+
+function Selection(props){
+    return(
+        <select onChange={props.onChange} className={"Selector"} id={"selector"}>
+            <option>Name</option>
+            <option>Author</option>
+            <option>Language</option>
+        </select>
+    )
+
+}
+
 
 class Export extends Component{
 
@@ -50,34 +62,26 @@ class Export extends Component{
     saveCSV(){
         let FileSaver = require("../node_modules/file-saver/FileSaver.min");
         const Json2csvParser = require('json2csv').Parser;
-        const fields = ['Name', 'Author', 'Language', 'Sales'];
+        const fields = ['Name', 'Author', 'Language', 'Price', 'Sales'];
         const json2csvParser = new Json2csvParser({ fields });
         const csv = json2csvParser.parse(data);
         console.log(csv);
         let blob = new Blob([csv], { type: "text/plain; charset=utf-8" });
         FileSaver.saveAs(blob, "Books.csv");
     }
-
-    style = {
-        "width": "25vmin",
-        "height": "4.5vmin",
-        "backgroundColor": "lightgrey", /* Green */
-        "border": "yellow",
-        "color": "black ",
-        "align": "center",
-        "display": "inline-block",
-        "font-size": "2.5vmin",
-    };
     render(){
     return(
         <a>
-            <button style={this.style} onClick={()=>this.saveJSON()}>Export JSON</button>
-            <button style={this.style} onClick={()=>this.saveCSV()}>Export CSV</button>
+            <button className={"savebut"} onClick={()=>this.saveJSON()}>Export JSON</button>
+            <button className={"savebut"} onClick={()=>this.saveCSV()}>Export CSV</button>
         </a>
     );
     }
 }
 
+class PopWindow extends Component{
+
+}
 
 
 class Tbl extends Component {
@@ -94,7 +98,7 @@ class Tbl extends Component {
             let temp = props.values[i];
             let tbls = this.state.tableArray;
             tbls.push(<tr><td>{temp['Name']}</td><td>{temp['Author']}</td>
-                <td>{temp['Language']}</td><td>{temp['Sales']}</td></tr>);
+                <td>{temp['Language']}</td><td>{temp['Price']}</td><td>{temp['Sales']}</td></tr>);
             this.setState({tableArray:tbls});
         }
     }
@@ -129,13 +133,12 @@ class Tbl extends Component {
         for (let i=0; i<len; i++){
             let temp = arr[i];
             tbls.push(<tr><td>{temp['Name']}</td><td>{temp['Author']}</td>
-                <td>{temp['Language']}</td><td>{temp['Sales']}</td></tr>);
+                <td>{temp['Language']}</td><td>{temp['Price']}</td><td>{temp['Sales']}</td></tr>);
             this.setState({tableArray:tbls});
         }
         console.log(this.state.tableArray);
         this.render();
     }
-
     sort_num(index) {
         let len = data.length;
         let arr = data;
@@ -172,38 +175,48 @@ class Tbl extends Component {
         for (let i=0; i<len; i++){
             let temp = arr[i];
             tbls.push(<tr><td>{temp['Name']}</td><td>{temp['Author']}</td>
-                <td>{temp['Language']}</td><td>{temp['Sales']}</td></tr>);
+                <td>{temp['Language']}</td><td>{temp['Price']}</td><td>{temp['Sales']}</td></tr>);
             this.setState({tableArray:tbls});
         }
         this.render();
     }
-
-
     Bookclick (){
         this.sort_string("Name");
+        this.Filter();
     }
     Authorclick () {
         this.sort_string("Author");
+        this.Filter();
     }
     Languageclick () {
         this.sort_string("Language");
+        this.Filter();
     }
     Salesclick(){
         this.sort_num("Sales");
+        this.Filter();
+    }
+    Priceclick(){
+        this.sort_num("Price");
+        this.Filter();
     }
     Filter(){
+        let selectorFields = ['Name', 'Author', 'Language'];
+        let id = document.getElementById("selector").selectedIndex;
+        let index = selectorFields[id];
         let s = document.getElementById("inpt").value;
         let len = data.length;
         let arr = data;
         let tbls = [];
         for (let i=0; i<len; i++){
             let temp = arr[i];
-            let name = temp['Name'].toLowerCase();
+            let name = temp[index].toLowerCase();
             if (name.search(s.toLowerCase()) !== -1) {
                 tbls.push(<tr>
                     <td>{temp['Name']}</td>
                     <td>{temp['Author']}</td>
                     <td>{temp['Language']}</td>
+                    <td>{temp['Price']}</td>
                     <td>{temp['Sales']}</td>
                 </tr>);
                 this.setState({tableArray: tbls});
@@ -214,13 +227,15 @@ class Tbl extends Component {
     render() {
         return (
             <div>
+
                 <Export/>
-                <div className="nameFilter">Book Filter</div>
+                <div className="nameFilter"><Selection onChange={()=>this.Filter()}/></div>
                 <input className="inputFilter" id={"inpt"}
                         onChange={()=>this.Filter()}/>
                 <Msg value={this.state.tableArray} BookClick={()=>this.Bookclick()}
                 AuthorClick={()=>this.Authorclick()} LangClick={()=>this.Languageclick()}
-                SalesClick={()=>this.Salesclick()}/>
+                SalesClick={()=>this.Salesclick()} PriceClick={()=>this.Priceclick()}/>
+
             </div>
         );
     }
