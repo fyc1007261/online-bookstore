@@ -3,20 +3,27 @@ import logo from './logo.svg';
 import './App.css';
 
 let data=[
-    {'Name' : '他改变了中国', 'Author': '罗伯特·劳伦斯·库恩', 'Price' : '100.00',
+    {'ID': '0', 'Name' : '他改变了中国', 'Author': '罗伯特·劳伦斯·库恩', 'Price' : '10000',
         'Language': 'Traditional Chinese', 'Sales': '100000'},
-    {'Name' : 'CS:APP', 'Author': 'Bryant, R.E', 'Price' : '159.95',
+    {'ID': '1','Name' : 'CS:APP', 'Author': 'Bryant, R.E', 'Price' : '15995',
         'Language': 'English', 'Sales': '10000'},
-    {'Name' : '蛙', 'Author': '莫言', 'Price' : '39.80',
+    {'ID': '2','Name' : '蛙', 'Author': '莫言', 'Price' : '3980',
         'Language': 'Simplified Chinese', 'Sales': '1000'},
-    {'Name' : '三国演义', 'Author': '罗贯中', 'Price' : '65.00',
+    {'ID': '3','Name' : '三国演义', 'Author': '罗贯中', 'Price' : '6500',
         'Language': 'Traditional Chinese', 'Sales': '50000'},
+    {'ID': '4','Name' : '数据库系统概念', 'Author': 'A. Silberschatz, etc.', 'Price' : '9900',
+        'Language': 'Simplified Chinese', 'Sales': '20000'},
+    {'ID': '5','Name' : '机器学习', 'Author': '周志华', 'Price' : '5600',
+        'Language': 'Simplified Chinese', 'Sales': '23333'},
+    {'ID': '6','Name' : 'Machine Learning Practice', 'Author': 'P. Harrington', 'Price' : '6900',
+        'Language': 'English', 'Sales': '1234'},
 ];
 
 
 function Msg (props) {
         let style = {
-            "width": "35vmin",
+            "border-radius": "2vmin",
+            "width": "30vmin",
             "backgroundColor": "lightgrey", /* Green */
             "border": "yellow",
             "color": "black ",
@@ -97,8 +104,14 @@ class Tbl extends Component {
         for (let i=0; i<len; i++){
             let temp = props.values[i];
             let tbls = this.state.tableArray;
-            tbls.push(<tr><td>{temp['Name']}</td><td>{temp['Author']}</td>
-                <td>{temp['Language']}</td><td>{temp['Price']}</td><td>{temp['Sales']}</td></tr>);
+            tbls.push(<tr>
+                <td>{temp['Name']}</td>
+                <td>{temp['Author']}</td>
+                <td>{temp['Language']}</td>
+                <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
+                <td>{temp['Sales']}</td>
+                <td><button className={'viewBut'} id={temp['ID']} onClick={this.viewBook}>View</button></td>
+            </tr>);
             this.setState({tableArray:tbls});
         }
     }
@@ -132,8 +145,14 @@ class Tbl extends Component {
         let tbls = [];
         for (let i=0; i<len; i++){
             let temp = arr[i];
-            tbls.push(<tr><td>{temp['Name']}</td><td>{temp['Author']}</td>
-                <td>{temp['Language']}</td><td>{temp['Price']}</td><td>{temp['Sales']}</td></tr>);
+            tbls.push(<tr>
+                <td>{temp['Name']}</td>
+                <td>{temp['Author']}</td>
+                <td>{temp['Language']}</td>
+                <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
+                <td>{temp['Sales']}</td>
+                <td><button className={'viewBut'} id={temp['ID']} onClick={this.viewBook}>View</button></td>
+            </tr>);
             this.setState({tableArray:tbls});
         }
         console.log(this.state.tableArray);
@@ -174,11 +193,30 @@ class Tbl extends Component {
         let tbls = [];
         for (let i=0; i<len; i++){
             let temp = arr[i];
-            tbls.push(<tr><td>{temp['Name']}</td><td>{temp['Author']}</td>
-                <td>{temp['Language']}</td><td>{temp['Price']}</td><td>{temp['Sales']}</td></tr>);
+            tbls.push(
+                <tr>
+                    <td>{temp['Name']}</td>
+                    <td>{temp['Author']}</td>
+                    <td>{temp['Language']}</td>
+                    <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
+                    <td>{temp['Sales']}</td>
+                    <td><button className={'viewBut'} id={temp['ID']} onClick={this.viewBook}>View</button></td>
+                </tr>);
             this.setState({tableArray:tbls});
         }
         this.render();
+    }
+    viewBook(event){
+        let related;
+        for (let i=0; i<data.length; i++){
+            if (data[i].ID.toString() === event.target.id.toString()){
+                related = data[i];
+            }
+        }
+        alert("图书名称："+related["Name"] + "\n作者："+ related["Author"]
+            + "\n语言：" + related["Language"] + "\n售价："
+            + (Number(related["Price"])/100).toFixed(2).toString()
+            + "\n购买接口暂未开放");
     }
     Bookclick (){
         this.sort_string("Name");
@@ -216,8 +254,9 @@ class Tbl extends Component {
                     <td>{temp['Name']}</td>
                     <td>{temp['Author']}</td>
                     <td>{temp['Language']}</td>
-                    <td>{temp['Price']}</td>
+                    <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                     <td>{temp['Sales']}</td>
+                    <td><button className={'viewBut'} id={temp['ID']} onClick={this.viewBook}>View</button></td>
                 </tr>);
                 this.setState({tableArray: tbls});
             }
