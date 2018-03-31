@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from '../logo.svg';
+import './Booklist.css';
 
 let data=[
     {'ID': '0', 'Name' : '他改变了中国', 'Author': '罗伯特·劳伦斯·库恩', 'Price' : '10000',
@@ -15,7 +15,7 @@ let data=[
         'Language': 'Simplified Chinese', 'Sales': '20000'},
     {'ID': '5','Name' : '机器学习', 'Author': '周志华', 'Price' : '5600',
         'Language': 'Simplified Chinese', 'Sales': '23333'},
-    {'ID': '6','Name' : 'Machine Learning Practice', 'Author': 'P. Harrington', 'Price' : '6900',
+    {'ID': '6','Name' : 'ML Practice', 'Author': 'P. Harrington', 'Price' : '6900',
         'Language': 'English', 'Sales': '1234'},
 ];
 
@@ -61,12 +61,18 @@ function Selection(props){
 class Export extends Component{
 
     saveJSON(){
+        if (!window.confirm("是否确认下载JSON？")){
+            return;
+        }
         let FileSaver = require("../node_modules/file-saver/FileSaver.min");
         let blob = new Blob([JSON.stringify(data)], { type: "text/plain; charset=utf-8" });
         FileSaver.saveAs(blob, "Books.json");
     }
 
     saveCSV(){
+        if (!window.confirm("是否确认下载CSV？")){
+            return;
+        }
         let FileSaver = require("../node_modules/file-saver/FileSaver.min");
         const Json2csvParser = require('json2csv').Parser;
         const fields = ['Name', 'Author', 'Language', 'Price', 'Sales'];
@@ -280,15 +286,14 @@ class Tbl extends Component {
     }
 }
 
-class App extends Component{
+class Booklist extends Component{
     render(){
         return(
             <div>
-                <h1 align="center">Online Bookstore</h1>
                 <Tbl values={data}/>
             </div>
         )
     }
 }
 
-export default App;
+export default Booklist;

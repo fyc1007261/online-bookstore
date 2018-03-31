@@ -3,3 +3,36 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.links1{
+  position: absolute;
+  right: 10vmin;
+  top:5vmin;
+  margin-right: 1vmin;
+  margin-bottom: 10vmin;
+  background-color: #dedede;
+  font-size: 3vmin;
+  text-align: center;
+  width:20vmin;
+  height: 4.5vmin;
+}
+.links2{
+  position: absolute;
+  top:5vmin;
+  right: 30.5vmin;
+  margin-right: 1vmin;
+  margin-bottom: 10vmin;
+  background-color: #dedede;
+  font-size: 3vmin;
+  text-align: center;
+  width:20vmin;
+  height: 4.5vmin;
+}
+
+.linkText{
+  text-decoration: none;
+  color: black;
+
+}
+h1{
+  text-align: center;
+}

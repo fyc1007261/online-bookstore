@@ -1,8 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, Switch, Link } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory'
 import './index.css';
-import App from './App';
+import Booklist from './booklist/Booklist';
+import Home from './home/home';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+
+let history = createBrowserHistory();
+
+ReactDOM.render((
+        <Router history={history}>
+            <div>
+                <div className={"links1"}>
+                    <Link className={"linkText"} to={"/"}>Home</Link>
+                </div>
+                <div className={"links2"}>
+                    <Link className={"linkText"} to={"/booklist"}>Booklist</Link>
+                </div>
+                <h1>Online Bookstore</h1>
+
+            <Switch>
+                <Route exact path={"/"} component={Home}/>
+                <Route exact path={"/booklist"} component={Booklist}/>
+            </Switch>
+            </div>
+        </Router>
+    ),
+    document.getElementById('root')
+);
 registerServiceWorker();

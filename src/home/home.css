@@ -1,0 +1,34 @@
+.imgCSAPP{
+    float: left;
+    margin-left: 10vmin;
+    margin-top: 10vmin;
+    height: 60vmin;
+}
+.newarr{
+    float: left;
+    margin-left: 25vmin;
+    font-size: 10vmin;
+    color: blueviolet;
+}
+.off{
+    float: left;
+    margin-top: 10vmin;
+    margin-left: 40vmin;
+    font-size: 10vmin;
+    color: red;
+}
+.toList{
+    float: left;
+    margin-top: 40vmin;
+    background-color: #dedede;
+    font-size: 3vmin;
+    text-align: center;
+    width:30vmin;
+    height: 4.5vmin;
+    text-decoration: none;
+    color: black;
+}
+.back{
+    background-color: #d5f6ff;
+    height: 80vmin;
+}
