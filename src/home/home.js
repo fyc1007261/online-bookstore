@@ -7,11 +7,11 @@ class Home extends Component{
     render(){
         return(
             <div className={"back"}>
-                <img className={"imgCSAPP"} src={require("../res/csapp.png")}/>
+                <img className={"imgCSAPP"} alt={"An img of CSAPP"} src={require("../res/csapp.png")}/>
                 <div className={"ads"}>
                     <br/><br/><br/><br/>
                     <div className={"newarr"}>New Arrivals!!</div>
-                    <div className={"off"}>40% Off!</div>
+                    <div className={"off"}>$34.99 Only!!</div>
                 </div>
                 <Link className={"toList"} to={"/booklist"}>View Book List</Link>
             </div>

@@ -30,11 +30,11 @@ h1{
     font-size: 6.5vmin;
 }
 table{
+    margin-top: 2.5vmin;
     align-content: center;
     width: 120vmin;
     float: left;
     margin-left: 20vmin;
-    margin-top: 0vmin;
     font-family: verdana,arial,sans-serif;
     font-size: 2.5vmin;
     color:#333333;
@@ -65,6 +65,7 @@ th {
     background-color: #ffffff;
 }
 .nameFilter{
+    margin-top: 2.5vmin;
     border-radius: 2vmin;
     background-color: #dedede;
     font-size: 3vmin;
@@ -76,14 +77,16 @@ th {
 }
 .inputFilter{
     border-radius: 2vmin;
+    padding-left: 1vmin;
     float: left;
     width: 20vmin;
-    margin-left: 0vmin;
+    margin-top: 2.5vmin;
     height: 3.6vmin;
     margin-bottom: 0.4vmin;
     font-size: 3vmin;
 }
 .savebut{
+    margin-top: 2.5vmin;
     width: 25vmin;
     border-radius: 2vmin;
     height: 4.5vmin;
@@ -114,4 +117,9 @@ th {
     align: center;
     display: inline-block;
     font-size: 2.5vmin;
+}
+
+.back{
+    background-color: #d5f6ff;
+    height: 80vmin;
 }

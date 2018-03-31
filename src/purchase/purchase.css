@@ -1,0 +1,59 @@
+.confirm{
+    font-size: 5vmin;
+    text-align: left;
+    float: top;
+    font-family: Consolas;
+    font-weight: bold;
+    color: darkblue;
+    margin-left: 45vmin;
+}
+
+.BookInfo{
+    font-size: 3vmin;
+    margin-left: 45vmin;
+    float:left;
+    line-height: 8vmin;
+}
+.CustomerInfo{
+    font-size: 3vmin;
+    margin-left: 45vmin;
+    float: left;
+    line-height: 8vmin;
+}
+.back{
+    background-color: #d5f6ff;
+    height: 80vmin;
+}
+.submit{
+    position: absolute;
+    bottom: 20vmin;
+    right: 20vmin;
+    padding: 0.3vmin;
+    border-radius: 2vmin;
+    width: 18vmin;
+    height: 5vmin;
+    background-color: lightgrey;
+    border: yellow;
+    color: black;
+    align: center;
+    display: inline-block;
+    font-size: 3.5vmin;
+}
+.cancel{
+    position: absolute;
+    bottom: 20vmin;
+    right: 40vmin;
+    vertical-align: center;
+    border-radius: 2vmin;
+    width: 18vmin;
+    height: 5vmin;
+    background-color: lightgrey;
+    font-size: 3.5vmin;
+    text-align: center;
+}
+
+.linkText{
+    vertical-align: center;
+    text-decoration: none;
+    color: black;
+}

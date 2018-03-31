@@ -13,12 +13,13 @@
 .off{
     float: left;
     margin-top: 10vmin;
-    margin-left: 40vmin;
+    margin-left: 28vmin;
     font-size: 10vmin;
     color: red;
 }
 .toList{
     float: left;
+    margin-left: 20vmin;
     margin-top: 40vmin;
     background-color: #dedede;
     font-size: 3vmin;

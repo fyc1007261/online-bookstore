@@ -1,24 +1,11 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
+import { Link } from 'react-router-dom';
+
 import './Booklist.css';
+import {originalData} from '../data';
 
-let data=[
-    {'ID': '0', 'Name' : '他改变了中国', 'Author': '罗伯特·劳伦斯·库恩', 'Price' : '10000',
-        'Language': 'Traditional Chinese', 'Sales': '100000'},
-    {'ID': '1','Name' : 'CS:APP', 'Author': 'Bryant, R.E', 'Price' : '15995',
-        'Language': 'English', 'Sales': '10000'},
-    {'ID': '2','Name' : '蛙', 'Author': '莫言', 'Price' : '3980',
-        'Language': 'Simplified Chinese', 'Sales': '1000'},
-    {'ID': '3','Name' : '三国演义', 'Author': '罗贯中', 'Price' : '6500',
-        'Language': 'Traditional Chinese', 'Sales': '50000'},
-    {'ID': '4','Name' : '数据库系统概念', 'Author': 'A. Silberschatz, etc.', 'Price' : '9900',
-        'Language': 'Simplified Chinese', 'Sales': '20000'},
-    {'ID': '5','Name' : '机器学习', 'Author': '周志华', 'Price' : '5600',
-        'Language': 'Simplified Chinese', 'Sales': '23333'},
-    {'ID': '6','Name' : 'ML Practice', 'Author': 'P. Harrington', 'Price' : '6900',
-        'Language': 'English', 'Sales': '1234'},
-];
 
+let data = originalData;
 
 function Msg (props) {
         let style = {
@@ -64,7 +51,7 @@ class Export extends Component{
         if (!window.confirm("是否确认下载JSON？")){
             return;
         }
-        let FileSaver = require("../node_modules/file-saver/FileSaver.min");
+        let FileSaver = require("file-saver/FileSaver.min");
         let blob = new Blob([JSON.stringify(data)], { type: "text/plain; charset=utf-8" });
         FileSaver.saveAs(blob, "Books.json");
     }
@@ -73,7 +60,7 @@ class Export extends Component{
         if (!window.confirm("是否确认下载CSV？")){
             return;
         }
-        let FileSaver = require("../node_modules/file-saver/FileSaver.min");
+        let FileSaver = require("file-saver/FileSaver.min");
         const Json2csvParser = require('json2csv').Parser;
         const fields = ['Name', 'Author', 'Language', 'Price', 'Sales'];
         const json2csvParser = new Json2csvParser({ fields });
@@ -116,7 +103,12 @@ class Tbl extends Component {
                 <td>{temp['Language']}</td>
                 <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                 <td>{temp['Sales']}</td>
-                <td><button className={'viewBut'} id={temp['ID']} onClick={this.viewBook}>View</button></td>
+                <td>
+                    <Link className={"viewBut"} to={{
+                        pathname:"/purchase",
+                        state:{id: temp.ID}
+                    }}>Purchase</Link>
+                </td>
             </tr>);
             this.setState({tableArray:tbls});
         }
@@ -157,7 +149,12 @@ class Tbl extends Component {
                 <td>{temp['Language']}</td>
                 <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                 <td>{temp['Sales']}</td>
-                <td><button className={'viewBut'} id={temp['ID']} onClick={this.viewBook}>View</button></td>
+                <td>
+                    <Link className={"viewBut"} to={{
+                        pathname:"/purchase",
+                        state:{id: temp.ID}
+                    }}>Purchase</Link>
+                </td>
             </tr>);
             this.setState({tableArray:tbls});
         }
@@ -206,7 +203,12 @@ class Tbl extends Component {
                     <td>{temp['Language']}</td>
                     <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                     <td>{temp['Sales']}</td>
-                    <td><button className={'viewBut'} id={temp['ID']} onClick={this.viewBook}>View</button></td>
+                    <td>
+                        <Link className={"viewBut"} to={{
+                            pathname:"/purchase",
+                            state:{id: temp.ID}
+                        }}>Purchase</Link>
+                    </td>
                 </tr>);
             this.setState({tableArray:tbls});
         }
@@ -262,7 +264,12 @@ class Tbl extends Component {
                     <td>{temp['Language']}</td>
                     <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                     <td>{temp['Sales']}</td>
-                    <td><button className={'viewBut'} id={temp['ID']} onClick={this.viewBook}>View</button></td>
+                    <td>
+                        <Link className={"viewBut"} to={{
+                            pathname:"/purchase",
+                            state:{id: temp.ID}
+                        }}>Purchase</Link>
+                    </td>
                 </tr>);
                 this.setState({tableArray: tbls});
             }
@@ -271,7 +278,7 @@ class Tbl extends Component {
     }
     render() {
         return (
-            <div>
+            <div className={"back"}>
 
                 <Export/>
                 <div className="nameFilter"><Selection onChange={()=>this.Filter()}/></div>
@@ -280,7 +287,6 @@ class Tbl extends Component {
                 <Msg value={this.state.tableArray} BookClick={()=>this.Bookclick()}
                 AuthorClick={()=>this.Authorclick()} LangClick={()=>this.Languageclick()}
                 SalesClick={()=>this.Salesclick()} PriceClick={()=>this.Priceclick()}/>
-
             </div>
         );
     }
