@@ -65,7 +65,6 @@ class Export extends Component{
         const fields = ['Name', 'Author', 'Language', 'Price', 'Sales'];
         const json2csvParser = new Json2csvParser({ fields });
         const csv = json2csvParser.parse(data);
-        console.log(csv);
         let blob = new Blob([csv], { type: "text/plain; charset=utf-8" });
         FileSaver.saveAs(blob, "Books.csv");
     }
@@ -158,7 +157,6 @@ class Tbl extends Component {
             </tr>);
             this.setState({tableArray:tbls});
         }
-        console.log(this.state.tableArray);
         this.render();
     }
     sort_num(index) {

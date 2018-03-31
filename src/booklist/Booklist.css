@@ -40,6 +40,8 @@ table{
     color:#333333;
     border-color: #666666;
     border-collapse: collapse;
+    opacity: 1;
+    background-color: #d5f6ff;
 }
 tr {
     border-width: 0.2vmin;
@@ -54,7 +56,7 @@ td {
     padding: 1vmin;
     border-style: solid;
     border-color: #666666;
-    background-color: #ffffff;
+    background-color: #d5f6ff;
  }
 th {
     text-align: left;
@@ -62,7 +64,7 @@ th {
     padding: 1vmin;
     border-style: solid;
     border-color: #666666;
-    background-color: #ffffff;
+    background-color: #d5f6ff;
 }
 .nameFilter{
     margin-top: 2.5vmin;
