@@ -1,0 +1,31 @@
+.inputs{
+    float: left;
+    margin-top: 10vmin;
+    margin-left: 90vmin;
+    text-align: center;
+    font-size: 4vmin;
+}
+.logout{
+    margin-top: 2.5vmin;
+    width: 25vmin;
+    border-radius: 2vmin;
+    height: 4.5vmin;
+    backgroundColor: lightgrey;
+    border: yellow;
+    color: black;
+    align: center;
+    display: inline-block;
+    font-size: 2.5vmin;
+}
+.loginbut{
+     margin-top: 2.5vmin;
+     width: 25vmin;
+     border-radius: 2vmin;
+     height: 4.5vmin;
+     backgroundColor: lightgrey;
+     border: yellow;
+     color: black;
+     align: center;
+     display: inline-block;
+     font-size: 2.5vmin;
+ }

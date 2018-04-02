@@ -48,7 +48,7 @@ function Selection(props){
 class Export extends Component{
 
     saveJSON(){
-        if (!window.confirm("是否确认下载JSON？")){
+        if (!window.confirm("Sure to download JSON？")){
             return;
         }
         let FileSaver = require("file-saver/FileSaver.min");
@@ -57,7 +57,7 @@ class Export extends Component{
     }
 
     saveCSV(){
-        if (!window.confirm("是否确认下载CSV？")){
+        if (!window.confirm("Sure to download CSV？")){
             return;
         }
         let FileSaver = require("file-saver/FileSaver.min");

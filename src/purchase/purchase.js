@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './purchase.css';
-import { withRouter} from 'react-router'
+import {withRouter} from 'react-router'
 import {Link} from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import {originalData} from '../data';
+import {isLogin} from '../index';
 
 let data = originalData;
 
@@ -64,7 +66,15 @@ function Confirm(props) {
 }
 
 class Purchase extends Component{
+    static contextTypes = {
+        router: PropTypes.object
+    };
+
     render(){
+        if (!isLogin){
+            alert("Please login first")
+            this.context.router.history.push('/login');
+        }
         return (
             <div>
                 <Confirm ID={this.props.location.state.id}/>
