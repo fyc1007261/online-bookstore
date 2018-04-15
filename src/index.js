@@ -13,6 +13,7 @@ import Login from './js/login';
 import Profile from './js/profile';
 
 import registerServiceWorker from './js/registerServiceWorker';
+import $ from "jquery";
 
 
 let history = createBrowserHistory();
@@ -34,6 +35,14 @@ let setProfile = function (value) {
 }
 
 function LoginButton(props) {
+
+    $.ajax({ url: "login/check_session", context: document.body, async:false,
+        success: function(data){
+            if (data.toString()==="Succeed")
+            {
+                setLogin(true);
+            }
+        }});
     return(
         isLogin?
             <div className={"loginBut"}>
@@ -57,6 +66,9 @@ function LoginButton(props) {
 class Title extends Component{
     static contextTypes = {
         router: PropTypes.object
+    };
+    constructor(){
+        super();
     }
     render(){
         return(
@@ -91,6 +103,8 @@ ReactDOM.render((
     ),
     document.getElementById('root')
 );
+
+
 
 registerServiceWorker();
 

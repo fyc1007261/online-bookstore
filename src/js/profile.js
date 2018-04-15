@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 
 import {setLogin, profile, setProfile, isLogin} from "../index";
 import "../css/profile.css";
+import $ from "jquery";
 
 class Profile extends Component{
     static contextTypes = {
@@ -15,7 +16,11 @@ class Profile extends Component{
             return;
         }
         setLogin(false);
-        this.context.router.history.push('/booklist');
+        $.ajax({ url: "login/logout", context: document.body, async:false,
+            success: function(data){
+                alert("Log out success.");
+            }});
+        this.context.router.history.push('/');
     }
     render(){
         if (!isLogin){
