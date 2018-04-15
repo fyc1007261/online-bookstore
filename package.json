@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "history": "^4.7.2",
+    "jquery": "^3.3.1",
     "json2csv": "^4.0.2",
     "link": "^0.1.5",
     "react": "^16.2.0",

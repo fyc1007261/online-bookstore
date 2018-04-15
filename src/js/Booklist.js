@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import './Booklist.css';
-import {originalData} from '../data';
+import '../css/Booklist.css';
+import {originalData} from './data';
 
 
 let data = originalData;

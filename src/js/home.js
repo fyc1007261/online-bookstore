@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './home.css';
+import '../css/home.css';
 import { withRouter} from 'react-router'
 import {Link} from 'react-router-dom'
 

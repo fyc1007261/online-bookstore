@@ -2,16 +2,17 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Switch, Link } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory'
-import './index.css';
+import 'jquery';
 import PropTypes from 'prop-types';
 
-import Booklist from './booklist/Booklist';
-import Home from './home/home';
-import Purchase from './purchase/purchase';
-import Login from './login/login';
-import Profile from './profile/profile';
+import './css/index.css';
+import Booklist from './js/Booklist';
+import Home from './js/home';
+import Purchase from './js/purchase';
+import Login from './js/login';
+import Profile from './js/profile';
 
-import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker from './js/registerServiceWorker';
 
 
 let history = createBrowserHistory();
@@ -90,6 +91,7 @@ ReactDOM.render((
     ),
     document.getElementById('root')
 );
+
 registerServiceWorker();
 
 export {isLogin, setLogin, profile, setProfile};

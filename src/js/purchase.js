@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './purchase.css';
+import '../css/purchase.css';
 import {withRouter} from 'react-router'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import {originalData} from '../data';
+import {originalData} from '../js/data';
 import {isLogin} from '../index';
 
 let data = originalData;

@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {withRouter} from "react-router";
 import PropTypes from 'prop-types'
+import $ from 'jquery';
+
 
 import {setLogin} from "../index";
-import "./login.css";
+import "../css/login.css";
 
 
 
@@ -16,15 +18,15 @@ class Login extends Component{
     checkLogin(){
         let usn = document.getElementById("username").value;
         let psw = document.getElementById("password").value;
-        // temp
-        if (usn==="admin" && psw==="admin"){
-            alert("Success!");
-            setLogin(true);
-            this.context.router.history.goBack();
-        }
-        else{
-            alert("Invalid");
-        }
+
+        $.post("login/check", { usn: usn, psw: psw },
+            function(data){
+                if (data.toString()==="Succeed")
+                {
+                    setLogin(true);
+                    this.context.router.history.push('/booklist');
+                }
+            });
     }
     render(){
         return(

@@ -4,7 +4,7 @@ import {withRouter} from "react-router";
 import PropTypes from 'prop-types'
 
 import {setLogin, profile, setProfile, isLogin} from "../index";
-import "./profile.css";
+import "../css/profile.css";
 
 class Profile extends Component{
     static contextTypes = {
@@ -15,11 +15,11 @@ class Profile extends Component{
             return;
         }
         setLogin(false);
-        this.context.router.history.goBack();
+        this.context.router.history.push('/booklist');
     }
     render(){
         if (!isLogin){
-            alert("Please login first")
+            alert("Please login first");
             this.context.router.history.push('/login');
         }
         return(
