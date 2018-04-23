@@ -29,3 +29,19 @@
      display: inline-block;
      font-size: 2.5vmin;
  }
+.signupbut{
+    margin-top: 2.5vmin;
+    width: 25vmin;
+    border-radius: 2vmin;
+    height: 4.5vmin;
+    backgroundColor: lightgrey;
+    border: yellow;
+    color: black;
+    align: center;
+    display: inline-block;
+    font-size: 2.5vmin;
+}
+.back{
+    background-color: #d5f6ff;
+    height: 80vmin;
+}

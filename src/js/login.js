@@ -57,6 +57,8 @@ class Login extends Component{
 
                     <div>
                         <button className={"loginbut"} onClick={()=>this.checkLogin()}>Login</button>
+                        <br/>
+                        <Link to={"/signup"}><button className={"signupbut"}>Sign up</button></Link>
                     </div>
                     </div>
                 </div>

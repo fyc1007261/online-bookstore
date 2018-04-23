@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import '../css/Booklist.css';
-import {originalData} from './data';
+import $ from "jquery";
+import {setLogin} from "../index";
 
 
-let data = originalData;
+let data = [];
 
 function Msg (props) {
         let style = {
@@ -78,11 +79,6 @@ class Export extends Component{
     }
 }
 
-class PopWindow extends Component{
-
-}
-
-
 class Tbl extends Component {
     constructor(props){
         super(props);
@@ -103,14 +99,27 @@ class Tbl extends Component {
                 <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                 <td>{temp['Sales']}</td>
                 <td>
-                    <Link className={"viewBut"} to={{
-                        pathname:"/purchase",
-                        state:{id: temp.ID}
-                    }}>Purchase</Link>
+                    <button className={"viewBut"} onClick={()=>this.add_to_cart(temp.ID)}>Add to Cart</button>
                 </td>
             </tr>);
             this.setState({tableArray:tbls});
         }
+    }
+
+    add_to_cart(id){
+        $.ajax({ url: "purchase/add_to_cart",
+            data: {ID:id},
+            context: document.body,
+            async: true,
+            type: "post",
+            success: function(data){
+            if(data === "Succeed")
+                alert("Successfully added to the cart.");
+            else
+                alert("Error with data or connection.")
+            }});
+
+
     }
 
     sort_string(index) {
@@ -149,10 +158,7 @@ class Tbl extends Component {
                 <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                 <td>{temp['Sales']}</td>
                 <td>
-                    <Link className={"viewBut"} to={{
-                        pathname:"/purchase",
-                        state:{id: temp.ID}
-                    }}>Purchase</Link>
+                    <button className={"viewBut"} onClick={()=>this.add_to_cart(temp.ID)}>Add to Cart</button>
                 </td>
             </tr>);
             this.setState({tableArray:tbls});
@@ -202,28 +208,25 @@ class Tbl extends Component {
                     <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                     <td>{temp['Sales']}</td>
                     <td>
-                        <Link className={"viewBut"} to={{
-                            pathname:"/purchase",
-                            state:{id: temp.ID}
-                        }}>Purchase</Link>
+                        <button className={"viewBut"} onClick={()=>this.add_to_cart(temp.ID)}>Add to Cart</button>
                     </td>
                 </tr>);
             this.setState({tableArray:tbls});
         }
         this.render();
     }
-    viewBook(event){
-        let related;
-        for (let i=0; i<data.length; i++){
-            if (data[i].ID.toString() === event.target.id.toString()){
-                related = data[i];
-            }
-        }
-        alert("图书名称："+related["Name"] + "\n作者："+ related["Author"]
-            + "\n语言：" + related["Language"] + "\n售价："
-            + (Number(related["Price"])/100).toFixed(2).toString()
-            + "\n购买接口暂未开放");
-    }
+    // viewBook(event){
+    //     let related;
+    //     for (let i=0; i<data.length; i++){
+    //         if (data[i].ID.toString() === event.target.id.toString()){
+    //             related = data[i];
+    //         }
+    //     }
+    //     alert("图书名称："+related["Name"] + "\n作者："+ related["Author"]
+    //         + "\n语言：" + related["Language"] + "\n售价："
+    //         + (Number(related["Price"])/100).toFixed(2).toString()
+    //         + "\n购买接口暂未开放");
+    // }
     Bookclick (){
         this.sort_string("Name");
         this.Filter();
@@ -263,10 +266,7 @@ class Tbl extends Component {
                     <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                     <td>{temp['Sales']}</td>
                     <td>
-                        <Link className={"viewBut"} to={{
-                            pathname:"/purchase",
-                            state:{id: temp.ID}
-                        }}>Purchase</Link>
+                        <button className={"viewBut"} onClick={()=>this.add_to_cart(temp.ID)}>Add to Cart</button>
                     </td>
                 </tr>);
                 this.setState({tableArray: tbls});
@@ -292,6 +292,13 @@ class Tbl extends Component {
 
 class Booklist extends Component{
     render(){
+        $.ajax({ url: "/getBook",
+            context: document.body,
+            async: false,
+            type: "post",
+            success: function(value){
+                data = $.parseJSON(value);
+            }});
         return(
             <div>
                 <Tbl values={data}/>

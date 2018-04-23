@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import {withRouter} from "react-router";
 import PropTypes from 'prop-types'
 
-import {setLogin, profile, setProfile, isLogin} from "../index";
+import {setLogin, isLogin} from "../index";
 import "../css/profile.css";
 import $ from "jquery";
+
 
 class Profile extends Component{
     static contextTypes = {
@@ -27,14 +28,32 @@ class Profile extends Component{
             alert("Please login first");
             this.context.router.history.push('/login');
         }
+        let message="";
+        $.ajax({ url: "/profile/getinfo",
+            context: document.body,
+            async: false,
+            type: "post",
+            success: function(data){
+                message = data;
+            }});
+        if (message === "No info received"){
+            alert("Network connection error.");
+            return;
+        }
+        if (message === "Not signed in"){
+            alert("Please login first");
+            this.context.router.history.push('/login');
+            return;
+        }
+        let profile = $.parseJSON(message);
         return(
             <div>
                 <div className={"Info"}>
                     <h2>Your info:</h2>
-                    Name: {profile.name}<br/>
-                    Address: {profile.address}<br/>
-                    Email: {profile.email}<br/>
-                    Phone: {profile.phone}<br/>
+                    Name: {profile["name"]}<br/>
+                    Address: {profile["address"]}<br/>
+                    Email: {profile["email"]}<br/>
+                    Phone: {profile["phone"]}<br/>
                 </div>
                 <div >
                     <button className={"logout"} onClick={()=>this.logout()}>Log out</button>

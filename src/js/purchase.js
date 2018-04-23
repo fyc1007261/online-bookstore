@@ -4,10 +4,10 @@ import {withRouter} from 'react-router'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import {originalData} from '../js/data';
 import {isLogin} from '../index';
+import $ from "jquery";
 
-let data = originalData;
+let data;
 
 function Confirm(props) {
     let Book = {
@@ -75,6 +75,13 @@ class Purchase extends Component{
             alert("Please login first")
             this.context.router.history.push('/login');
         }
+        $.ajax({ url: "/getBook",
+            context: document.body,
+            async: false,
+            type: "post",
+            success: function(value){
+                data = $.parseJSON(value);
+            }});
         return (
             <div>
                 <Confirm ID={this.props.location.state.id}/>

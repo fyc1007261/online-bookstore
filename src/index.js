@@ -6,33 +6,25 @@ import 'jquery';
 import PropTypes from 'prop-types';
 
 import './css/index.css';
+
 import Booklist from './js/Booklist';
 import Home from './js/home';
 import Purchase from './js/purchase';
 import Login from './js/login';
 import Profile from './js/profile';
+import Signup from './js/signup';
+import Cart from './js/cart';
 
-import registerServiceWorker from './js/registerServiceWorker';
+import {unregister} from './js/registerServiceWorker';
 import $ from "jquery";
 
 
 let history = createBrowserHistory();
 let isLogin=false;
-let profile={
-    username: "admin",
-    name: "SJTU Student",
-    address: "No.800, Dongchuan Rd.",
-    email: "sjtu@sjtu.edu.cn",
-    phone : "13888866666",
-}
 
 let setLogin = function (value) {
     isLogin = value;
-}
-
-let setProfile = function (value) {
-    profile = value;
-}
+};
 
 function LoginButton(props) {
 
@@ -80,6 +72,9 @@ class Title extends Component{
                         <Link className={"linkText"} to={"/booklist"}>Booklist</Link>
                     </div>
                     <LoginButton className={"loginBut"}/>
+                    <div className={"links4"}>
+                        <Link className={"linkText"} to={"/cart"}>Cart</Link>
+                    </div>
                     <h1>Online Bookstore</h1>
                 </div>
         )
@@ -96,6 +91,8 @@ ReactDOM.render((
                 <Route exact path={"/purchase"} component={Purchase}/>
                 <Route exact path={"/login"} component={Login}/>
                 <Route exact path={"/profile"} component={Profile}/>
+                <Route exact path={"/signup"} component={Signup}/>
+                <Route exact path={"/cart"} component={Cart}/>
             </Switch>
             </div>
         </Router>
@@ -106,6 +103,6 @@ ReactDOM.render((
 
 
 
-registerServiceWorker();
+unregister();
 
-export {isLogin, setLogin, profile, setProfile};
+export {isLogin, setLogin};
