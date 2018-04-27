@@ -40,6 +40,40 @@ body {
   width:15vmin;
   height: 4.5vmin;
 }
+.links5{
+  position: absolute;
+  top:10.5vmin;
+  right: 10vmin;
+  margin-right: 1vmin;
+  margin-bottom: 10vmin;
+  background-color: #dedede;
+  font-size: 3vmin;
+  text-align: center;
+  width:15vmin;
+  height: 4.5vmin;
+}
+.links6{
+  position: absolute;
+  top:10.5vmin;
+  right: 42vmin;
+  margin-right: 1vmin;
+  margin-bottom: 10vmin;
+  background-color: #dedede;
+  font-size: 3vmin;
+  text-align: center;
+  width:15vmin;
+  height: 4.5vmin;
+}
+.SelectorAdmin{
+  border-radius: 0vmin;
+  border: 0px;
+  background-color: #dedede;
+  font-size: 3vmin;
+  text-align: center;
+  padding-left: 2vmin;
+  width:15vmin;
+  height: 4.5vmin;
+}
 .loginBut{
   position: absolute;
   top:5vmin;

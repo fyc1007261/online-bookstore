@@ -4,10 +4,28 @@
     float: left;
     line-height: 8vmin;
 }
+.index{
+    width: 30vmin;
+    height: 6vmin;
+}
 .logout{
-    float: top;
-    margin-top: 50vmin;
-    margin-left: 60vmin;
+    float: left;
+    margin-left: 20vmin;
+    margin-top: 60vmin;
+    width: 25vmin;
+    border-radius: 2vmin;
+    height: 4.5vmin;
+    backgroundColor: lightgrey;
+    border: yellow;
+    color: black;
+    align: center;
+    display: inline-block;
+    font-size: 2.5vmin;
+}
+.changeBut{
+    float: left;
+    margin-left: 5vmin;
+    margin-top: 60vmin;
     width: 25vmin;
     border-radius: 2vmin;
     height: 4.5vmin;

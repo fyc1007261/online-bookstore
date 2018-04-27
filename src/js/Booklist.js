@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import '../css/Booklist.css';
 import $ from "jquery";
-import {setLogin} from "../index";
 
 
 let data = [];
@@ -98,8 +97,14 @@ class Tbl extends Component {
                 <td>{temp['Language']}</td>
                 <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                 <td>{temp['Sales']}</td>
-                <td>
-                    <button className={"viewBut"} onClick={()=>this.add_to_cart(temp.ID)}>Add to Cart</button>
+                <td><button className="viewBut">
+                    <Link to={
+                        {
+                            pathname:"/purchase",
+                            state:{id:temp['ID']}
+                        }
+                    }>View
+                    </Link></button>
                 </td>
             </tr>);
             this.setState({tableArray:tbls});
@@ -108,13 +113,15 @@ class Tbl extends Component {
 
     add_to_cart(id){
         $.ajax({ url: "purchase/add_to_cart",
-            data: {ID:id},
+            data: {book_id:id},
             context: document.body,
             async: true,
             type: "post",
             success: function(data){
             if(data === "Succeed")
                 alert("Successfully added to the cart.");
+            else if (data === "Not logged in")
+                alert("Please log in first");
             else
                 alert("Error with data or connection.")
             }});
@@ -158,7 +165,14 @@ class Tbl extends Component {
                 <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                 <td>{temp['Sales']}</td>
                 <td>
-                    <button className={"viewBut"} onClick={()=>this.add_to_cart(temp.ID)}>Add to Cart</button>
+                    <button className="viewBut">
+                        <Link to={
+                            {
+                                pathname:"/purchase",
+                                state:{id:temp['ID']}
+                            }
+                        }>View
+                        </Link></button>
                 </td>
             </tr>);
             this.setState({tableArray:tbls});
@@ -168,13 +182,13 @@ class Tbl extends Component {
     sort_num(index) {
         let len = data.length;
         let arr = data;
-        for (let i=0; i<len; i++){
+        for (let i = 0; i < len; i++) {
             arr[i][index] = Number(arr[i][index]);
         }
-        if (arr[0][index] > arr[len-1][index]){
+        if (arr[0][index] > arr[len - 1][index]) {
             for (let i = 0; i < len - 1; i++) {
                 for (let j = 0; j < len - 1 - i; j++) {
-                    if ((arr[j][index]) > (arr[j + 1][index]) ) {
+                    if ((arr[j][index]) > (arr[j + 1][index])) {
                         let temp = arr[j];
                         arr[j] = arr[j + 1];
                         arr[j + 1] = temp;
@@ -182,7 +196,7 @@ class Tbl extends Component {
                 }
             }
         }
-        else{
+        else {
             for (let i = 0; i < len - 1; i++) {
                 for (let j = 0; j < len - 1 - i; j++) {
                     if ((arr[j][index]) < (arr[j + 1][index])) {
@@ -193,40 +207,35 @@ class Tbl extends Component {
                 }
             }
         }
-        for (let i=0; i<len; i++){
+        for (let i = 0; i < len; i++) {
             arr[i][index] = String(arr[i][index]);
         }
         data = arr;
         let tbls = [];
-        for (let i=0; i<len; i++){
+        for (let i = 0; i < len; i++) {
             let temp = arr[i];
             tbls.push(
                 <tr>
                     <td>{temp['Name']}</td>
                     <td>{temp['Author']}</td>
                     <td>{temp['Language']}</td>
-                    <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
+                    <td>{(Number(temp['Price']) / 100).toFixed(2)}</td>
                     <td>{temp['Sales']}</td>
                     <td>
-                        <button className={"viewBut"} onClick={()=>this.add_to_cart(temp.ID)}>Add to Cart</button>
+                        <button className="viewBut">
+                            <Link to={
+                                {
+                                    pathname: "/purchase",
+                                    state: {id: temp['ID']}
+                                }
+                            }>View
+                            </Link></button>
                     </td>
                 </tr>);
-            this.setState({tableArray:tbls});
+            this.setState({tableArray: tbls});
         }
         this.render();
     }
-    // viewBook(event){
-    //     let related;
-    //     for (let i=0; i<data.length; i++){
-    //         if (data[i].ID.toString() === event.target.id.toString()){
-    //             related = data[i];
-    //         }
-    //     }
-    //     alert("图书名称："+related["Name"] + "\n作者："+ related["Author"]
-    //         + "\n语言：" + related["Language"] + "\n售价："
-    //         + (Number(related["Price"])/100).toFixed(2).toString()
-    //         + "\n购买接口暂未开放");
-    // }
     Bookclick (){
         this.sort_string("Name");
         this.Filter();

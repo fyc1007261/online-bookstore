@@ -12,22 +12,8 @@ class Profile extends Component{
     static contextTypes = {
         router: PropTypes.object
     };
-    logout(){
-        if (!window.confirm("Sure to log out?")){
-            return;
-        }
-        setLogin(false);
-        $.ajax({ url: "login/logout", context: document.body, async:false,
-            success: function(data){
-                alert("Log out success.");
-            }});
-        this.context.router.history.push('/');
-    }
-    render(){
-        if (!isLogin){
-            alert("Please login first");
-            this.context.router.history.push('/login');
-        }
+    constructor(){
+        super();
         let message="";
         $.ajax({ url: "/profile/getinfo",
             context: document.body,
@@ -46,16 +32,74 @@ class Profile extends Component{
             return;
         }
         let profile = $.parseJSON(message);
+        this.state = {
+            name: profile['name'],
+            phone: profile['phone'],
+            email: profile['email'],
+            address: profile['address']
+        }
+    }
+    logout(){
+        if (!window.confirm("Sure to log out?")){
+            return;
+        }
+        setLogin(false);
+        $.ajax({ url: "login/logout", context: document.body, async:false,
+            success: function(data){
+                alert("Log out success.");
+            }});
+        this.context.router.history.push('/');
+    }
+    submitChange(){
+        $.ajax({ url: "profile/update",
+            data: {
+                name:this.state.name,
+                email:this.state.email,
+                phone:this.state.phone,
+                address:this.state.address
+            },
+            context: document.body,
+            async: true,
+            type: "get",
+            success: function(data){
+                if (data.toString()!=="Succeed")
+                {
+                    alert("Update profile error.");
+                }
+                else{
+                    alert("Success!");
+                }
+            }});
+    }
+    changeProfile(id){
+        let obj = document.getElementById(id);
+        let new_val = obj.value;
+        if (id==="name")
+            this.setState({name :new_val});
+        else if (id==="phone")
+            this.setState({phone :new_val});
+        else if (id==="address")
+            this.setState({address :new_val});
+        else if (id==="email")
+            this.setState({email :new_val});
+    }
+    render(){
+        if (!isLogin){
+            alert("Please login first");
+            this.context.router.history.push('/login');
+        }
+
         return(
             <div>
                 <div className={"Info"}>
                     <h2>Your info:</h2>
-                    Name: {profile["name"]}<br/>
-                    Address: {profile["address"]}<br/>
-                    Email: {profile["email"]}<br/>
-                    Phone: {profile["phone"]}<br/>
+                    <div className="index">Name:</div> <input value={this.state.name} id={"name"} onChange={()=>this.changeProfile("name")}/>
+                    <div className="index">Address:</div> <input value={this.state.address} id={"address"} onChange={()=>this.changeProfile("address")}/>
+                    <div className="index">Email:</div> <input value={this.state.email} id={"email"} onChange={()=>this.changeProfile("email")}/>
+                    <div className="index">Phone:</div> <input value={this.state.phone} id={"phone"} onChange={()=>this.changeProfile("phone")}/>
                 </div>
-                <div >
+                <div>
+                    <button className={"changeBut"} onClick={()=>this.submitChange()}>Submit</button>
                     <button className={"logout"} onClick={()=>this.logout()}>Log out</button>
                 </div>
             </div>

@@ -14,9 +14,12 @@ import Login from './js/login';
 import Profile from './js/profile';
 import Signup from './js/signup';
 import Cart from './js/cart';
+import Indents from './js/indents';
 
 import {unregister} from './js/registerServiceWorker';
 import $ from "jquery";
+
+import BooklistAdmin from "./js/admin/adminBook";
 
 
 let history = createBrowserHistory();
@@ -62,6 +65,12 @@ class Title extends Component{
     constructor(){
         super();
     }
+    jump(){
+        let pos = document.getElementById("adminSelector").selectedIndex;
+        if (pos === 1)
+            this.context.router.history.push("/admin_booklist");
+    }
+
     render(){
         return(
                 <div>
@@ -74,6 +83,17 @@ class Title extends Component{
                     <LoginButton className={"loginBut"}/>
                     <div className={"links4"}>
                         <Link className={"linkText"} to={"/cart"}>Cart</Link>
+                    </div>
+                    <div className={"links5"}>
+                        <Link className={"linkText"} to={"/indents"}>Indents</Link>
+                    </div>
+                    <div className={"links6"}>
+                        <select onChange={()=>this.jump()} className={"SelectorAdmin"} id={"adminSelector"}>
+                            <option>Admin</option>
+                            <option>--Book</option>
+                            <option>--Users</option>
+                            <option>--Stats</option>
+                        </select>
                     </div>
                     <h1>Online Bookstore</h1>
                 </div>
@@ -93,6 +113,8 @@ ReactDOM.render((
                 <Route exact path={"/profile"} component={Profile}/>
                 <Route exact path={"/signup"} component={Signup}/>
                 <Route exact path={"/cart"} component={Cart}/>
+                <Route exact path={"/indents"} component={Indents}/>
+                <Route exact path={"/admin_booklist"} component={BooklistAdmin}/>
             </Switch>
             </div>
         </Router>

@@ -16,6 +16,7 @@ function Confirm(props) {
         Author: "",
         Language: "",
         Price: 0,
+        Summary:""
     };
     let Customer = {
         Name:"",
@@ -29,37 +30,44 @@ function Confirm(props) {
             Book.Author= data[i].Author;
             Book.Language= data[i].Language;
             Book.Price = data[i].Price;
+            Book.Summary = data[i].Summary;
         }
     }
-    //set customer info
-    Customer.Name="SJTU Student";
-    Customer.Address= "No.800, Dongchuan Rd.";
-    Customer.Email = "sjtu@sjtu.edu.cn";
-    Customer.Phone = "13888866666";
+
+    let purchase = function (id) {
+        $.ajax({ url: "purchase/add_to_cart",
+            data: {book_id:id},
+            context: document.body,
+            async: true,
+            type: "post",
+            success: function(data){
+                if(data === "Succeed")
+                    alert("Successfully added to the cart.");
+                else if (data === "Not logged in")
+                    alert("Please log in first");
+                else
+                    alert("Error with data or connection.")
+            }});
+    }
+
     return(
         <div className={"back"}>
-            <div className={"confirm"}>Please Confirm Your Purchase</div>
-            <div className={"BookInfo"}>
-                <h2>Your info:</h2>
-                Name: {Customer.Name}<br/>
-                Address: {Customer.Address}<br/>
-                Email: {Customer.Email}<br/>
-                Phone: {Customer.Phone}<br/>
-            </div>
+            <div className={"confirm"}>Book Information</div>
             <div className={"CustomerInfo"}>
                 <h2>Book info:</h2>
                 Name: {Book.Name}<br/>
                 Author: {Book.Author}<br/>
                 Language: {Book.Language}<br/>
                 Price: {(Number(Book.Price)/100).toFixed(2)}<br/>
+                Summary: {Book.Summary}<br/>
             </div>
             <div className={"cancel"}>
                 <Link className={"linkText"} to={"/booklist"}>Cancel</Link>
             </div>
             <button
                 className={"submit"}
-                onClick={()=>alert("Unable to purchase yet.")}>
-                Submit
+                onClick={()=>purchase(Book.ID)}>
+                Add to Cart
             </button>
         </div>
     );

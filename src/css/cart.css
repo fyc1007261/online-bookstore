@@ -41,3 +41,14 @@ th {
     border-color: #666666;
     background-color: #d5f6ff;
 }
+
+.submitOrder{
+    float: left;
+    margin-left: 95vmin;
+    margin-top: 5vmin;
+    background-color: #dedede;
+    font-size: 3vmin;
+    text-align: center;
+    width:25vmin;
+    height: 4.5vmin;
+}

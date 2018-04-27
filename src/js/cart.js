@@ -43,12 +43,14 @@ class ChangeAmount extends Component{
                 success: function(data){
                     if (data.toString()!=="Succeed")
                     {
-                        alert("Error changing the amount.");
+                        if (data.toString()==="No enough books")
+                            alert("No enough books!");
+                        else
+                            alert("Error changing the amount.");
                     }
                 }});
-            if(new_val<=0){
-                window.location.reload();
-            }
+            window.location.reload();
+
         }
 
 
@@ -67,6 +69,9 @@ class ChangeAmount extends Component{
 
 
 class Cart extends Component {
+    static contextTypes = {
+        router: PropTypes.object
+    };
     constructor(){
         super();
         this.state = {
@@ -97,6 +102,17 @@ class Cart extends Component {
         }
     }
 
+    submitOrder(){
+        $.ajax({ url: "/purchase/create_indent",
+            context: document.body,
+            async: false,
+            type: "post",
+            success: function(data){
+                alert(data);
+            }});
+        this.context.router.history.push('/indents');
+    }
+
     render() {
         let style = {
             "border-radius": "2vmin",
@@ -120,6 +136,9 @@ class Cart extends Component {
                 {this.state.tableArray}
                 </tbody>
                 </table>
+                <br/>
+                <button className="submitOrder" onClick={()=>this.submitOrder()}>Submit Order</button>
+
             </div>
         );
     }
