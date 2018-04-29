@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import '../css/Booklist.css';
+import '../css/list.css';
 import $ from "jquery";
 
 
@@ -10,7 +10,7 @@ let data = [];
 function Msg (props) {
         let style = {
             "border-radius": "2vmin",
-            "width": "30vmin",
+            "width": "25vmin",
             "backgroundColor": "lightgrey", /* Green */
             "border": "yellow",
             "color": "black ",
@@ -24,6 +24,7 @@ function Msg (props) {
                 <th><button style={style} onClick={props.BookClick}>Book</button></th>
                 <th><button style={style} onClick={props.AuthorClick}>Author</button></th>
                 <th><button style={style} onClick={props.LangClick}>Language</button></th>
+                <th><button style={style} onClick={props.CategoryClick}>Category</button></th>
                 <th><button style={style} onClick={props.PriceClick}>Price</button></th>
                 <th><button style={style} onClick={props.SalesClick}>Sales</button></th>
                 <tbody>
@@ -62,7 +63,7 @@ class Export extends Component{
         }
         let FileSaver = require("file-saver/FileSaver.min");
         const Json2csvParser = require('json2csv').Parser;
-        const fields = ['Name', 'Author', 'Language', 'Price', 'Sales'];
+        const fields = ['Name', 'Author', 'Language','Category', 'Price', 'Sales'];
         const json2csvParser = new Json2csvParser({ fields });
         const csv = json2csvParser.parse(data);
         let blob = new Blob([csv], { type: "text/plain; charset=utf-8" });
@@ -95,6 +96,7 @@ class Tbl extends Component {
                 <td>{temp['Name']}</td>
                 <td>{temp['Author']}</td>
                 <td>{temp['Language']}</td>
+                <td>{temp['Category']}</td>
                 <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                 <td>{temp['Sales']}</td>
                 <td><button className="viewBut">
@@ -155,28 +157,6 @@ class Tbl extends Component {
             }
         }
         data = arr;
-        let tbls = [];
-        for (let i=0; i<len; i++){
-            let temp = arr[i];
-            tbls.push(<tr>
-                <td>{temp['Name']}</td>
-                <td>{temp['Author']}</td>
-                <td>{temp['Language']}</td>
-                <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
-                <td>{temp['Sales']}</td>
-                <td>
-                    <button className="viewBut">
-                        <Link to={
-                            {
-                                pathname:"/purchase",
-                                state:{id:temp['ID']}
-                            }
-                        }>View
-                        </Link></button>
-                </td>
-            </tr>);
-            this.setState({tableArray:tbls});
-        }
         this.render();
     }
     sort_num(index) {
@@ -211,29 +191,6 @@ class Tbl extends Component {
             arr[i][index] = String(arr[i][index]);
         }
         data = arr;
-        let tbls = [];
-        for (let i = 0; i < len; i++) {
-            let temp = arr[i];
-            tbls.push(
-                <tr>
-                    <td>{temp['Name']}</td>
-                    <td>{temp['Author']}</td>
-                    <td>{temp['Language']}</td>
-                    <td>{(Number(temp['Price']) / 100).toFixed(2)}</td>
-                    <td>{temp['Sales']}</td>
-                    <td>
-                        <button className="viewBut">
-                            <Link to={
-                                {
-                                    pathname: "/purchase",
-                                    state: {id: temp['ID']}
-                                }
-                            }>View
-                            </Link></button>
-                    </td>
-                </tr>);
-            this.setState({tableArray: tbls});
-        }
         this.render();
     }
     Bookclick (){
@@ -248,6 +205,10 @@ class Tbl extends Component {
         this.sort_string("Language");
         this.Filter();
     }
+    CategoryClick(){
+        this.sort_string("Category");
+        this.Filter();
+    }
     Salesclick(){
         this.sort_num("Sales");
         this.Filter();
@@ -257,7 +218,7 @@ class Tbl extends Component {
         this.Filter();
     }
     Filter(){
-        let selectorFields = ['Name', 'Author', 'Language'];
+        let selectorFields = ['Name', 'Author', 'Language','Category'];
         let id = document.getElementById("selector").selectedIndex;
         let index = selectorFields[id];
         let s = document.getElementById("inpt").value;
@@ -272,6 +233,7 @@ class Tbl extends Component {
                     <td>{temp['Name']}</td>
                     <td>{temp['Author']}</td>
                     <td>{temp['Language']}</td>
+                    <td>{temp['Category']}</td>
                     <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                     <td>{temp['Sales']}</td>
                     <td>
@@ -291,7 +253,7 @@ class Tbl extends Component {
                 <div className="nameFilter"><Selection onChange={()=>this.Filter()}/></div>
                 <input className="inputFilter" id={"inpt"}
                         onChange={()=>this.Filter()}/>
-                <Msg value={this.state.tableArray} BookClick={()=>this.Bookclick()}
+                <Msg value={this.state.tableArray} BookClick={()=>this.Bookclick()} CategoryClick={()=>this.CategoryClick()}
                 AuthorClick={()=>this.Authorclick()} LangClick={()=>this.Languageclick()}
                 SalesClick={()=>this.Salesclick()} PriceClick={()=>this.Priceclick()}/>
             </div>

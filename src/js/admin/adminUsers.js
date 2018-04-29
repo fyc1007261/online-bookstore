@@ -24,7 +24,7 @@ let data = [];
 function Msg (props) {
     let style = {
         "border-radius": "2vmin",
-        "width": "22vmin",
+        "width": "25vmin",
         "backgroundColor": "lightgrey", /* Green */
         "border": "yellow",
         "color": "black ",
@@ -35,13 +35,12 @@ function Msg (props) {
     };
     return (
         <table>
-            <th><button style={style} onClick={props.IDClick}>BookID</button></th>
-            <th><button style={style} onClick={props.BookClick}>Book</button></th>
-            <th><button style={style} onClick={props.AuthorClick}>Author</button></th>
-            <th><button style={style} onClick={props.LangClick}>Language</button></th>
-            <th><button style={style} onClick={props.CategoryClick}>Category</button></th>
-            <th><button style={style} onClick={props.PriceClick}>Price</button></th>
-            <th><button style={style} onClick={props.InventoryClick}>Inventory</button></th>
+            <th><button style={style} onClick={props.UsernameClick}>Username</button></th>
+            <th><button style={style} onClick={props.NameClick}>Real name</button></th>
+            <th><button style={style} onClick={props.PhoneClick}>Phone</button></th>
+            <th><button style={style} onClick={props.EmailClick}>Email</button></th>
+            <th><button style={style} onClick={props.AddressClick}>Address</button></th>
+            <th><button style={style} onClick={props.ValidClick}>isValid</button></th>
             <tbody>
             {props.value}
             </tbody>
@@ -52,11 +51,11 @@ function Msg (props) {
 function Selection(props){
     return(
         <select onChange={props.onChange} className={"Selector"} id={"selector"}>
-            <option>BookID</option>
-            <option>Name</option>
-            <option>Author</option>
-            <option>Language</option>
-            <option>Category</option>
+            <option>Username</option>
+            <option>Real Name</option>
+            <option>Phone</option>
+            <option>Email</option>
+            <option>Address</option>
         </select>
     )
 
@@ -71,7 +70,7 @@ class Export extends Component{
         }
         let FileSaver = require("file-saver/FileSaver.min");
         let blob = new Blob([JSON.stringify(data)], { type: "text/plain; charset=utf-8" });
-        FileSaver.saveAs(blob, "Books.json");
+        FileSaver.saveAs(blob, "Users.json");
     }
 
     saveCSV(){
@@ -80,11 +79,11 @@ class Export extends Component{
         }
         let FileSaver = require("file-saver/FileSaver.min");
         const Json2csvParser = require('json2csv').Parser;
-        const fields = ['ID','Name', 'Author', 'Language', 'Category', 'Price', 'Sales', 'Inventory', 'Summary'];
+        const fields = ['Username','Name', 'Phone', 'Email', 'Address'];
         const json2csvParser = new Json2csvParser({ fields });
         const csv = json2csvParser.parse(data);
         let blob = new Blob([csv], { type: "text/plain; charset=utf-8" });
-        FileSaver.saveAs(blob, "Books.csv");
+        FileSaver.saveAs(blob, "Users.csv");
     }
     render(){
         return(
@@ -131,34 +130,15 @@ class Tbl extends Component {
             let temp = props.values[i];
             let tbls = this.state.tableArray;
             tbls.push(<tr>
-                <td>{temp['ID']}</td>
+                <td>{temp['Username']}</td>
                 <td>{temp['Name']}</td>
-                <td>{temp['Author']}</td>
-                <td>{temp['Language']}</td>
-                <td>{temp['Category']}</td>
-                <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
-                <td>{temp['Inventory']}</td>
+                <td>{temp['Phone']}</td>
+                <td>{temp['Email']}</td>
+                <td>{temp['Address']}</td>
+                <td>{temp['isValid']}</td>
             </tr>);
             this.setState({tableArray:tbls});
         }
-    }
-
-    add_to_cart(id){
-        $.ajax({ url: "purchase/add_to_cart",
-            data: {book_id:id},
-            context: document.body,
-            async: true,
-            type: "post",
-            success: function(data){
-                if(data === "Succeed")
-                    alert("Successfully added to the cart.");
-                else if (data === "Not logged in")
-                    alert("Please log in first");
-                else
-                    alert("Error with data or connection.")
-            }});
-
-
     }
 
     sort_string(index) {
@@ -221,38 +201,31 @@ class Tbl extends Component {
             arr[i][index] = String(arr[i][index]);
         }
         data = arr;
+        let tbls = [];
         this.render();
     }
-    Bookclick (){
+    Usernameclick (){
+        this.sort_string("Username");
+        this.Filter();
+    }
+    Nameclick () {
         this.sort_string("Name");
         this.Filter();
     }
-    Authorclick () {
-        this.sort_string("Author");
+    Emailclick () {
+        this.sort_string("Email");
         this.Filter();
     }
-    Languageclick () {
-        this.sort_string("Language");
+    Phoneclick(){
+        this.sort_num("Phone");
         this.Filter();
     }
-    CategoryClick(){
-        this.sort_string("Category");
-        this.Filter();
-    }
-    Inventoryclick(){
-        this.sort_num("Inventory");
-        this.Filter();
-    }
-    Priceclick(){
-        this.sort_num("Price");
-        this.Filter();
-    }
-    IDClick(){
-        this.sort_num("ID");
+    Addressclick(){
+        this.sort_string("Address");
         this.Filter();
     }
     Filter(){
-        let selectorFields = ['ID', 'Name', 'Author', 'Language','Category'];
+        let selectorFields = ['Username', 'Name', 'Phone', 'Email', 'Address', 'isValid'];
         let id = document.getElementById("selector").selectedIndex;
         let index = selectorFields[id];
         let s = document.getElementById("inpt").value;
@@ -264,13 +237,12 @@ class Tbl extends Component {
             let name = temp[index].toLowerCase();
             if (name.search(s.toLowerCase()) !== -1) {
                 tbls.push(<tr>
-                    <td>{temp['ID']}</td>
+                    <td>{temp['Username']}</td>
                     <td>{temp['Name']}</td>
-                    <td>{temp['Author']}</td>
-                    <td>{temp['Language']}</td>
-                    <td>{temp['Category']}</td>
-                    <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
-                    <td>{temp['Inventory']}</td>
+                    <td>{temp['Phone']}</td>
+                    <td>{temp['Email']}</td>
+                    <td>{temp['Address']}</td>
+                    <td>{temp['isValid']}</td>
                 </tr>);
                 this.setState({tableArray: tbls});
             }
@@ -279,42 +251,25 @@ class Tbl extends Component {
     }
 
     fetchState(){
-        let id = document.getElementById("inputID").value;
+        let username = document.getElementById("inputUsername").value;
         for (let i=0; i<data.length; i++){
-            if (data[i]["ID"] === id){
-                let theBook = data[i];
-                document.getElementById("inputName").value = theBook["Name"];
-                document.getElementById("inputAuthor").value = theBook["Author"];
-                document.getElementById("inputLanguage").value = theBook["Language"];
-                document.getElementById("inputCategory").value = theBook["Category"];
-                document.getElementById("inputPrice").value = (theBook["Price"]/100).toFixed(2);
-                document.getElementById("inputInventory").value = theBook["Inventory"];
-                document.getElementById("inputSummary").value = theBook["Summary"];
+            if (data[i]["Username"] === username){
+                let theUser = data[i];
+                document.getElementById("inputIsValid").value = theUser["isValid"];
             }
         }
     }
 
-    modifyBook(){
-        let name = document.getElementById("inputName").value;
-        let author = document.getElementById("inputAuthor").value;
-        let language = document.getElementById("inputLanguage").value;
-        let book_id = document.getElementById("inputID").value;
-        let price = document.getElementById("inputPrice").value;
-        let inventory = document.getElementById("inputInventory").value;
-        let summary = document.getElementById("inputSummary").value;
-        let category = document.getElementById("inputCategory").value;
+    modifyUser(){
+        let username = document.getElementById("inputUsername").value;
+        let isValid = document.getElementById("inputIsValid").value;
+
         let ret;
-        $.ajax({ url: "admin/modify_book",
+        $.ajax({ url: "admin/modify_user",
             data: {
-                name:name,
-                author: author,
-                language:language,
-                book_id: book_id,
-                price: price,
-                category:category,
-                inventory: inventory,
-                summary: summary
-                },
+                username: username,
+                isValid: isValid
+            },
             context: document.body,
             async: false,
             type: "post",
@@ -326,28 +281,6 @@ class Tbl extends Component {
                 alert("Bad connection or invalid inputs");
             }
 
-        });
-        if (ret==="Success"){
-            window.location.reload();
-        }
-    }
-
-    deleteBook(){
-        let ret;
-        $.ajax({ url: "admin/delete_book",
-            data: {
-                book_id: document.getElementById("inputID").value
-            },
-            context: document.body,
-            async: false,
-            type: "post",
-            success: function(data){
-                ret = data;
-                alert(data);
-            },
-            error: function () {
-                alert("Bad connection or invalid inputs");
-            }
         });
         if (ret==="Success"){
             window.location.reload();
@@ -361,10 +294,9 @@ class Tbl extends Component {
                 <div className="nameFilter"><Selection onChange={()=>this.Filter()}/></div>
                 <input className="inputFilter" id={"inpt"}
                        onChange={()=>this.Filter()}/>
-                <Msg value={this.state.tableArray} BookClick={()=>this.Bookclick()}
-                     AuthorClick={()=>this.Authorclick()} LangClick={()=>this.Languageclick()}
-                     InventoryClick={()=>this.Inventoryclick()} PriceClick={()=>this.Priceclick()}
-                    IDClick={()=>this.IDClick()} CategoryClick={()=>this.CategoryClick()}
+                <Msg value={this.state.tableArray} UsernameClick={()=>this.Usernameclick()}
+                     AddressClick={()=>this.Addressclick()} PhoneClick={()=>this.Phoneclick()}
+                     EmailClick={()=>this.Emailclick()} NameClick={()=>this.Nameclick()}
                 />
                 <button className={"manageBut"} onClick={this.openModal}>Manage</button>
                 <Modal
@@ -374,21 +306,14 @@ class Tbl extends Component {
                     style={customStyles}
                     contentLabel="Example Modal"
                 >
-                    <h2 ref={subtitle => this.subtitle = subtitle}>Manage a book</h2>
-                    <h3>Type in the book ID to fetch and update information.</h3>
-                    <h3>Adding a new book is also valid.</h3>
+                    <h2 ref={subtitle => this.subtitle = subtitle}>Manage a user</h2>
+                    <h3>Type in the Username to update information.</h3>
+                    <h3>Adding a new user is NOT valid.</h3>
                     <form>
-                        <br/>Book ID<br/><input id={"inputID"} onChange={()=>this.fetchState()}/>
-                        <br/> new Name<br/><input id={"inputName"}/>
-                        <br/> new Author<br/><input id={"inputAuthor"}/>
-                        <br/> new Language<br/><input id={"inputLanguage"}/>
-                        <br/> new Category<br/><input id={"inputCategory"}/>
-                        <br/> new Price<br/><input id={"inputPrice"}/>
-                        <br/> new Inventory<br/><input id={"inputInventory"}/>
-                        <br/> new Summary<br/> <input id={"inputSummary"}/>
+                        <br/>Username<br/><input id={"inputUsername"} onChange={()=>this.fetchState()}/>
+                        <br/>isValid<br/> <input id={"inputIsValid"}/>
                     </form>
-                    <button onClick={()=>this.modifyBook()}>Submit</button>
-                    <button onClick={()=>this.deleteBook()}>Delete this book</button>
+                    <button onClick={()=>this.modifyUser()}>Submit</button>
                     <button onClick={this.closeModal}>close</button>
                 </Modal>
             </div>
@@ -396,13 +321,13 @@ class Tbl extends Component {
     }
 }
 
-class BooklistAdmin extends Component{
+class UserAdmin extends Component{
     static contextTypes = {
         router: PropTypes.object
     };
 
     render(){
-        $.ajax({ url: "admin/getBook",
+        $.ajax({ url: "admin/get_user",
             context: document.body,
             async: false,
             type: "post",
@@ -419,10 +344,9 @@ class BooklistAdmin extends Component{
         return(
             <div>
                 <Tbl values={data}/>
-
             </div>
         )
     }
 }
 
-export default BooklistAdmin;
+export default UserAdmin;

@@ -99,6 +99,19 @@ th {
     display: inline-block;
     font-size: 2.5vmin;
 }
+.savebutAdmin{
+    margin-top: 2.5vmin;
+    margin-left: 70vmin;
+    width: 25vmin;
+    border-radius: 2vmin;
+    height: 4.5vmin;
+    backgroundColor: lightgrey;
+    border: yellow;
+    color: black;
+    align: center;
+    display: inline-block;
+    font-size: 2.5vmin;
+}
 .Selector{
     border-radius: 2vmin;
     background-color: #dedede;
@@ -122,7 +135,7 @@ th {
 }
 
 .manageBut{
-    padding: 0.3vmin;
+    padding: 0.2vmin;
     border-radius: 2vmin;
     width: 25vmin;
     height: 4.5vmin;
@@ -132,7 +145,7 @@ th {
     color: black;
     align: center;
     display: inline-block;
-    font-size: 3.5vmin;
+    font-size: 3vmin;
 }
 .back{
     background-color: #d5f6ff;

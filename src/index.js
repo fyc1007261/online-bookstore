@@ -20,6 +20,8 @@ import {unregister} from './js/registerServiceWorker';
 import $ from "jquery";
 
 import BooklistAdmin from "./js/admin/adminBook";
+import UserAdmin from "./js/admin/adminUsers";
+import IndentsAdmin from "./js/admin/adminIndents";
 
 
 let history = createBrowserHistory();
@@ -69,6 +71,10 @@ class Title extends Component{
         let pos = document.getElementById("adminSelector").selectedIndex;
         if (pos === 1)
             this.context.router.history.push("/admin_booklist");
+        if (pos === 2)
+            this.context.router.history.push("/admin_users");
+        if (pos === 3)
+            this.context.router.history.push('/admin_indents');
     }
 
     render(){
@@ -115,6 +121,8 @@ ReactDOM.render((
                 <Route exact path={"/cart"} component={Cart}/>
                 <Route exact path={"/indents"} component={Indents}/>
                 <Route exact path={"/admin_booklist"} component={BooklistAdmin}/>
+                <Route exact path={"/admin_users"} component={UserAdmin}/>
+                <Route exact path={"/admin_indents"} component={IndentsAdmin}/>
             </Switch>
             </div>
         </Router>

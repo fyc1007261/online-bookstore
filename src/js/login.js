@@ -24,7 +24,7 @@ class Login extends Component{
     checkLogin(){
         let usn = document.getElementById("username").value;
         let psw = document.getElementById("password").value;
-        let result = false;
+        let result;
 
         $.ajax({ url: "login/check",
             data: {usn:usn, psw:psw},
@@ -32,7 +32,8 @@ class Login extends Component{
             async: false,
             type: "post",
             success: function(data){
-                if (data.toString()==="Succeed")
+                result = data.toString();
+                if (result==="Succeed")
                 {
                     setLogin(true)
                 }
@@ -41,6 +42,9 @@ class Login extends Component{
         if (isLogin){
             this.context.router.history.goBack();
             alert("Success!");
+        }
+        else if (result==="Blocked user"){
+            alert("Your ID has been blocked");
         }
         else{
             alert("Invalid username or password.");
