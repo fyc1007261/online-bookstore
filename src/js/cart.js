@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import '../css/cart.css';
 import {withRouter} from 'react-router'
-import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import {isLogin, setLogin} from '../index';
 import $ from "jquery";
 
 

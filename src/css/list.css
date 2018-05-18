@@ -147,6 +147,22 @@ th {
     display: inline-block;
     font-size: 3vmin;
 }
+.tot{
+    margin-left: 60vmin;
+    width: 40vmin;
+    height: 4.5vmin;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 3vmin;
+}
+.tot2{
+    margin-left: 10vmin;
+    width: 40vmin;
+    height: 4.5vmin;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 3vmin;
+}
 .back{
     background-color: #d5f6ff;
     height: 80vmin;

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import '../../css/list.css';
 import $ from "jquery";
 import Modal from 'react-modal';
-import {setLogin} from "../../index";
 import PropTypes from "prop-types";
 
 const customStyles = {

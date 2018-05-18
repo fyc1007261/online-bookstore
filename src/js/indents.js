@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import '../css/indents.css';
 import {withRouter} from 'react-router'
-import {Link} from 'react-router-dom'
-import PropTypes from 'prop-types'
-
-import {isLogin, setLogin} from '../index';
 import $ from "jquery";
 
 class Indents extends Component {
@@ -38,7 +34,7 @@ class Indents extends Component {
                 <td>{temp['Author']}</td>
                 <td>{temp['Amount']}</td>
                 <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
-                <td>{temp['Time']}</td>
+                <td>{temp['Time'].replace('T', ' ')}</td>
             </tr>);
             this.setState({tableArray: tbls})
         }
@@ -75,7 +71,7 @@ class Indents extends Component {
                 <td>{temp['Author']}</td>
                 <td>{temp['Amount']}</td>
                 <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
-                <td>{temp['Time']}</td>
+                <td>{temp['Time'].replace('T', ' ')}</td>
                 </tr>);
             console.log(this.state.tableArray);
             this.setState({tableArray: tbls})

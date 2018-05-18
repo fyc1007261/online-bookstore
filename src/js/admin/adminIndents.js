@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import '../../css/list.css';
 import $ from "jquery";
 import Modal from 'react-modal';
-import {setLogin} from "../../index";
 import PropTypes from "prop-types";
 
 const customStyles = {
@@ -100,23 +98,13 @@ class Tbl extends Component {
 
     constructor(props){
         super(props);
-        this.state = {
-            modalIsOpen: false
-        };
-
-        this.openModal = this.openModal.bind(this);
-        this.afterOpenModal = this.afterOpenModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
-        this.state = {
-            a : 1,
-            tableArray : [],
-            inp: ''
-        };
-        this.Filter = this.Filter.bind(this);
+        let price = 0, sales = 0;
+        let tbls = [];
         let len = props.values.length;
         for (let i=0; i<len; i++){
             let temp = props.values[i];
-            let tbls = this.state.tableArray;
+            price = price + Number((Number(temp['Price'])/100).toFixed(2));
+            sales = Number(temp['Amount']) + sales;
             tbls.push(<tr>
                 <td>{temp['Username']}</td>
                 <td>{temp['OrderID']}</td>
@@ -125,10 +113,22 @@ class Tbl extends Component {
                 <td>{temp['Category']}</td>
                 <td>{temp['Amount']}</td>
                 <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
-                <td>{temp['Time']}</td>
+                <td>{temp['Time'].replace('T',' ')}</td>
             </tr>);
-            this.setState({tableArray:tbls});
         }
+
+        this.state = {
+            modalIsOpen: false,
+            tableArray:tbls,
+            totSales: sales,
+            totPrice: price
+        };
+
+        this.openModal = this.openModal.bind(this);
+        this.afterOpenModal = this.afterOpenModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.Filter = this.Filter.bind(this);
+
     }
 
     sort_string(index) {
@@ -234,29 +234,32 @@ class Tbl extends Component {
         if (category!=="" && item['Category']!==category)
             return false;
         if (startTime==="")
-            startTime = "0000/00/00 00:00:00";
+            startTime = "0000-00-00T00:00:00";
         if (endTime==="")
-            endTime = "9999/00/00 00:00:00";
+            endTime = "9999-00-00T00:00:00";
         return (item['Time']>=startTime && item['Time']<=endTime);
     }
 
     Filter(from){
         let len = data.length;
-        let arr = data;
         let tbls = [];
         let author, username, category, startTime, endTime;
         if (from===0){
              author = document.getElementById("inputAuthor").value;
              username = document.getElementById("inputUsername").value;
              category = document.getElementById("inputCategory").value;
-             startTime = document.getElementById("inputStartTime").value;
-             endTime = document.getElementById("inputEndTime").value;
+             startTime = document.getElementById("inputStartTime").value.toString();
+             endTime = document.getElementById("inputEndTime").value.toString();
+             console.log(startTime, endTime);
         }
+        let price=0, sales=0;
         for (let i=0; i<len; i++){
             let temp = data[i];
             console.log(this.check_filter(temp, author, username, startTime, endTime, category));
             if(from !==1 && (!this.check_filter(temp, author, username, startTime, endTime, category)))
                 continue;
+            price = price + Number((Number(temp['Price'])/100).toFixed(2));
+            sales = Number(temp['Amount']) + sales;
             tbls.push(
                 <tr>
                     <td>{temp['Username']}</td>
@@ -266,9 +269,10 @@ class Tbl extends Component {
                     <td>{temp['Category']}</td>
                     <td>{temp['Amount']}</td>
                     <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
-                    <td>{temp['Time']}</td>
+                    <td>{temp['Time'].replace('T',' ')}</td>
                 </tr>);
-            this.setState({tableArray: tbls})
+            this.setState({tableArray: tbls});
+            this.setState({totPrice: price, totSales:sales})
         }
         this.render();
     }
@@ -277,13 +281,16 @@ class Tbl extends Component {
         return (
             <div className={"back"}>
                 <Export/>
+                <button className={"manageBut"} onClick={this.openModal}>Manage</button>
                 <Msg value={this.state.tableArray} OrderIDClick={()=>this.OrderIDclick()}
                      NameClick={()=>this.Nameclick()} CategoryClick={()=>this.Categoryclick()}
                      PriceClick={()=>this.Priceclick()} AmountClick={()=>this.Amountclick()}
                      TimeClick={()=>this.Timeclick()} UsernameClick={()=>this.Usernameclick()}
                      AuthorClick={()=>this.Amountclick()}
                 />
-                <button className={"manageBut"} onClick={this.openModal}>Manage</button>
+
+                <div className={"tot"}> Tot Sales:{this.state.totSales} </div>
+                <div className={"tot2"}>Tot Price:{this.state.totPrice}</div>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
@@ -298,8 +305,8 @@ class Tbl extends Component {
                         <br/>Username<br/><input id={"inputUsername"}/>
                         <br/>Author<br/> <input id={"inputAuthor"}/>
                         <br/>Category<br/> <input id={"inputCategory"}/>
-                        <br/>Start time<br/> <input id={"inputStartTime"}/>
-                        <br/>End time<br/> <input id={"inputEndTime"}/>
+                        <br/>Start time<br/> <input type={"datetime-local"} placeholder={"yy-mm-dd hh:mm:ss"} id={"inputStartTime"}/>
+                        <br/>End time<br/> <input type={"datetime-local"} placeholder={"yy-mm-dd hh:mm:ss"} id={"inputEndTime"}/>
                     </form>
                     <button onClick={()=>this.Filter(0)}>Submit</button>
                     <button onClick={this.closeModal}>close</button>

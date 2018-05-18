@@ -18,12 +18,6 @@ function Confirm(props) {
         Price: 0,
         Summary:""
     };
-    let Customer = {
-        Name:"",
-        Address:"",
-        Email:"",
-        Phone:"",
-    };
     for (let i=0; i<data.length; i++){
         if (Number(data[i].ID) === Number(Book.ID)) {
             Book.Name = data[i].Name;
@@ -67,7 +61,7 @@ function Confirm(props) {
             <button
                 className={"submit"}
                 onClick={()=>purchase(Book.ID)}>
-                Add to Cart
+                Purchase
             </button>
         </div>
     );

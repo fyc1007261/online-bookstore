@@ -64,9 +64,6 @@ class Title extends Component{
     static contextTypes = {
         router: PropTypes.object
     };
-    constructor(){
-        super();
-    }
     jump(){
         let pos = document.getElementById("adminSelector").selectedIndex;
         if (pos === 1)

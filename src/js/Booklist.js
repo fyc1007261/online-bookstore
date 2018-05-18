@@ -236,8 +236,14 @@ class Tbl extends Component {
                     <td>{temp['Category']}</td>
                     <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                     <td>{temp['Sales']}</td>
-                    <td>
-                        <button className={"viewBut"} onClick={()=>this.add_to_cart(temp.ID)}>Add to Cart</button>
+                    <td><button className="viewBut">
+                        <Link to={
+                            {
+                                pathname:"/purchase",
+                                state:{id:temp['ID']}
+                            }
+                        }>View
+                        </Link></button>
                     </td>
                 </tr>);
                 this.setState({tableArray: tbls});
