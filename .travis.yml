@@ -20,16 +20,5 @@ after_script:
   - git add .
   - git commit -m "Update docs"
   - git push --force --quiet "https://${GithubToken}@${GH_REF}" master:master
-# E: Build LifeCycle
 
-branches:
-  only:
-    - blog-resource
-env:
- global:
-   - GH_REF: github.com/gl09025/hexo-blog.git
 
-作者：从这到那
-链接：https://www.jianshu.com/p/5691815b81b6
-來源：简书
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
