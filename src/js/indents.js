@@ -106,7 +106,7 @@ class Indents extends Component {
                 <FormGroup>
                     <ControlLabel className="controlLabel">Create Time</ControlLabel>
                     {''}
-                    <FormControl  onChange={()=>this.change_filter()} placeholder={"yyyy/mm/dd"} id={"timeFilter"} className="indentFilters"/>
+                    <FormControl  onChange={()=>this.change_filter()} placeholder={"yyyy-mm-dd"} id={"timeFilter"} className="indentFilters"/>
                 </FormGroup>
                 </Form>
                 <table className={"indentTableCart"}>

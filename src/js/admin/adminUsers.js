@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 
 import '../../css/list.css';
 import $ from "jquery";
-import Modal from 'react-modal';
 
-import {Button} from 'react-bootstrap';
+import {Button, ModalTitle, ModalHeader, ModalFooter,ModalBody,Modal} from 'react-bootstrap';
 
 import PropTypes from "prop-types";
 
@@ -24,7 +23,6 @@ let data = [];
 
 function Msg (props) {
     let style = {
-        "border-radius": "2vmin",
         "width": "25vmin",
         "border": "yellow",
         "color": "black ",
@@ -98,7 +96,7 @@ class Export extends Component{
 class Tbl extends Component {
 
     openModal() {
-        this.setState({modalIsOpen: true});
+        this.setState({showModal: true});
     }
 
     afterOpenModal() {
@@ -107,21 +105,18 @@ class Tbl extends Component {
     }
 
     closeModal() {
-        this.setState({modalIsOpen: false});
+        this.setState({showModal: false});
     }
 
     constructor(props){
         super(props);
-        this.state = {
-            modalIsOpen: false
-        };
-
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.state = {
             a : 1,
             tableArray : [],
+            showModal:false,
             inp: ''
         };
         this.Filter = this.Filter.bind(this);
@@ -297,23 +292,28 @@ class Tbl extends Component {
                      AddressClick={()=>this.Addressclick()} PhoneClick={()=>this.Phoneclick()}
                      EmailClick={()=>this.Emailclick()} NameClick={()=>this.Nameclick()}
                 />
-                <Button bsStyle="info" className={"manageBut"} onClick={this.openModal}>Manage</Button>
+                <Button bsStyle="success" className={"manageBut"} onClick={this.openModal}>Manage</Button>
                 <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
-                    onRequestClose={this.closeModal}
-                    style={customStyles}
-                    contentLabel="Example Modal"
+                    show={this.state.showModal}
+                    onHide={this.closeModal}
                 >
-                    <h2 ref={subtitle => this.subtitle = subtitle}>Manage a user</h2>
-                    <h3>Type in the Username to update information.</h3>
-                    <h3>Adding a new user is NOT valid.</h3>
-                    <form>
-                        <br/>Username<br/><input id={"inputUsername"} onChange={()=>this.fetchState()}/>
-                        <br/>isValid<br/> <input id={"inputIsValid"}/>
-                    </form>
-                    <button onClick={()=>this.modifyUser()}>Submit</button>
-                    <button onClick={this.closeModal}>close</button>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                        Manage a user
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <h4>Type in the Username to update information.</h4>
+                        <h4>Adding a new user is NOT valid.</h4>
+                        <form>
+                            <br/>Username<br/><input id={"inputUsername"} onChange={()=>this.fetchState()}/>
+                            <br/>isValid<br/> <input id={"inputIsValid"}/>
+                        </form>
+                    </Modal.Body>
+                        <Modal.Footer>
+                        <Button onClick={()=>this.modifyUser()}>Submit</Button>
+                        <Button onClick={this.closeModal}>Close</Button>
+                        </Modal.Footer>
                 </Modal>
             </div>
         );

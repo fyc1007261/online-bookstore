@@ -28,26 +28,15 @@
     position: absolute;
     bottom: 20vmin;
     right: 20vmin;
-    padding: 0.3vmin;
-    border-radius: 2vmin;
-    width: 18vmin;
-    height: 5vmin;
-    background-color: lightgrey;
-    border: yellow;
-    color: black;
-    align: center;
-    display: inline-block;
+    vertical-align: center;
     font-size: 3.5vmin;
+    text-align: center;
 }
 .cancel{
     position: absolute;
     bottom: 20vmin;
     right: 40vmin;
     vertical-align: center;
-    border-radius: 2vmin;
-    width: 18vmin;
-    height: 5vmin;
-    background-color: lightgrey;
     font-size: 3.5vmin;
     text-align: center;
 }

@@ -37,17 +37,17 @@ table{
     margin-left: 20vmin;
     font-family: verdana,arial,sans-serif;
     font-size: 2.5vmin;
-    opacity: 1;
+    opacity: 0;
     background-color: white;
 }
 tr {
     border-width: 0.2vmin;
-    padding: 1vmin;
+    padding: 0;
     background-color: white;
     }
 td {
     text-align: left;
-    padding: 1vmin;
+    padding: 0;
     border-style: none;
     background-color: white;
  }
@@ -91,10 +91,7 @@ th {
     margin-top: 2.5vmin;
     margin-left: 70vmin;
     width: 25vmin;
-    border-radius: 2vmin;
-    height: 4.5vmin;
-    border: yellow;
-    color: black;
+    height: 6vmin;
     align: center;
     display: inline-block;
     font-size: 2.5vmin;

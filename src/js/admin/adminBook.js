@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {Button} from 'react-bootstrap';
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader, ModalTitle} from 'react-bootstrap';
 
 import '../../css/list.css';
 import $ from "jquery";
-import Modal from 'react-modal';
+//import Modal from 'react-modal';
 import PropTypes from "prop-types";
 
 const customStyles = {
@@ -22,7 +22,6 @@ let data = [];
 
 function Msg (props) {
     let style = {
-        "border-radius": "2vmin",
         "width": "22vmin",
         "border": "yellow",
         "color": "black ",
@@ -97,7 +96,7 @@ class Export extends Component{
 class Tbl extends Component {
 
     openModal() {
-        this.setState({modalIsOpen: true});
+        this.setState({showModal: true});
     }
 
     afterOpenModal() {
@@ -106,21 +105,18 @@ class Tbl extends Component {
     }
 
     closeModal() {
-        this.setState({modalIsOpen: false});
+        this.setState({showModal: false});
     }
 
     constructor(props){
         super(props);
-        this.state = {
-            modalIsOpen: false
-        };
-
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.state = {
             a : 1,
             tableArray : [],
+            showModal:false,
             inp: ''
         };
         this.Filter = this.Filter.bind(this);
@@ -366,15 +362,17 @@ class Tbl extends Component {
                 />
                 <Button  bsStyle="success" className={"manageBut"} onClick={this.openModal}>Manage</Button>
                 <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
-                    onRequestClose={this.closeModal}
-                    style={customStyles}
-                    contentLabel="Example Modal"
+                    show={this.state.showModal}
+                    onHide={this.closeModal}
                 >
-                    <h2 ref={subtitle => this.subtitle = subtitle}>Manage a book</h2>
-                    <h3>Type in the book ID to fetch and update information.</h3>
-                    <h3>Adding a new book is also valid.</h3>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                        Manage a book
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <h4>Type in the book ID to fetch and update information.</h4>
+                    <h4>Adding a new book is also valid.</h4>
                     <form>
                         <br/>Book ID<br/><input id={"inputID"} onChange={()=>this.fetchState()}/>
                         <br/> new Name<br/><input id={"inputName"}/>
@@ -385,9 +383,12 @@ class Tbl extends Component {
                         <br/> new Inventory<br/><input id={"inputInventory"}/>
                         <br/> new Summary<br/> <input id={"inputSummary"}/>
                     </form>
+                    </Modal.Body>
+                <Modal.Footer>
                     <Button onClick={()=>this.modifyBook()}>Submit</Button>
-                    <Button onClick={()=>this.deleteBook()}>Delete this book</Button>
-                    <Button onClick={this.closeModal}>close</Button>
+                    <Button bsStyle={"danger"} onClick={()=>this.deleteBook()}>Delete this book</Button>
+                    <Button onClick={this.closeModal}>Close</Button>
+                </Modal.Footer>
                 </Modal>
             </div>
         );

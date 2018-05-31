@@ -18,6 +18,7 @@ import Indents from './js/indents';
 
 import {unregister} from './js/registerServiceWorker';
 import $ from "jquery";
+import {Button} from "react-bootstrap";
 
 import BooklistAdmin from "./js/admin/adminBook";
 import UserAdmin from "./js/admin/adminUsers";
@@ -54,7 +55,7 @@ function LoginButton(props) {
             <Link  className={"linkText"} to={{
                 pathname: "/login",
             }}>
-                 Login
+                Login
             </Link>
             </div>
     )
@@ -78,17 +79,25 @@ class Title extends Component{
         return(
                 <div>
                     <div className={"links1"}>
-                        <Link className={"linkText"} to={"/"}>Home</Link>
+                        <Link className={"linkText"} to={"/"}>
+                            Home
+                        </Link>
                     </div>
                     <div className={"links2"}>
-                        <Link className={"linkText"} to={"/booklist"}>Booklist</Link>
+                        <Link className={"linkText"} to={"/booklist"}>
+                            BookList
+                        </Link>
                     </div>
                     <LoginButton className={"loginBut"}/>
                     <div className={"links4"}>
-                        <Link className={"linkText"} to={"/cart"}>Cart</Link>
+                        <Link className={"linkText"} to={"/cart"}>
+                            Cart
+                        </Link>
                     </div>
                     <div className={"links5"}>
-                        <Link className={"linkText"} to={"/indents"}>Indents</Link>
+                        <Link className={"linkText"} to={"/indents"}>
+                            Indents
+                        </Link>
                     </div>
                     <div className={"links6"}>
                         <select onChange={()=>this.jump()} className={"SelectorAdmin"} id={"adminSelector"}>

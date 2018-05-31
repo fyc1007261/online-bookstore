@@ -7,9 +7,10 @@
 }
 
 .indentFilters{
+    width: 20vmin;
     padding-left: 1vmin;
     margin-top: 2vmin;
-    height: 3.6vmin;
+    height: 6vmin;
     font-size: 3vmin;
 }
 .controlLabel{

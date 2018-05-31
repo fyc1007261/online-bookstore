@@ -4,6 +4,8 @@ import {withRouter} from 'react-router'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
+import {Button} from 'react-bootstrap';
+
 import {isLogin} from '../index';
 import $ from "jquery";
 
@@ -56,13 +58,17 @@ function Confirm(props) {
                 Summary: {Book.Summary}<br/>
             </div>
             <div className={"cancel"}>
-                <Link className={"linkText"} to={"/booklist"}>Cancel</Link>
+                <Link className={"linkText"} to={"/booklist"}>
+                    <Button bsSize={"large"}>
+                    Cancel
+                    </Button>
+                </Link>
             </div>
-            <button
+            <Button bsStyle={"primary"} bySize={"large"}
                 className={"submit"}
                 onClick={()=>purchase(Book.ID)}>
                 Purchase
-            </button>
+            </Button>
         </div>
     );
 }

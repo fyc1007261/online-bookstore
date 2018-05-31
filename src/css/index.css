@@ -5,60 +5,65 @@ body {
 }
 
 .links1{
+  color: white;
   position: absolute;
   right: 10vmin;
   top:5vmin;
   margin-right: 1vmin;
   margin-bottom: 10vmin;
-  background-color: #dedede;
+  background-color: lightgrey;
   font-size: 3vmin;
   text-align: center;
   width:15vmin;
   height: 4.5vmin;
 }
 .links2{
+  color: white;
   position: absolute;
   top:5vmin;
   right: 26vmin;
   margin-right: 1vmin;
   margin-bottom: 10vmin;
-  background-color: #dedede;
+  background-color: lightgrey;
   font-size: 3vmin;
   text-align: center;
   width:15vmin;
   height: 4.5vmin;
 }
 .links4{
+  color: white;
   position: absolute;
   top:10.5vmin;
   right: 26vmin;
   margin-right: 1vmin;
   margin-bottom: 10vmin;
-  background-color: #dedede;
+  background-color: lightgrey;
   font-size: 3vmin;
   text-align: center;
   width:15vmin;
   height: 4.5vmin;
 }
 .links5{
+
   position: absolute;
   top:10.5vmin;
   right: 10vmin;
   margin-right: 1vmin;
   margin-bottom: 10vmin;
-  background-color: #dedede;
+  background-color: lightgrey;
   font-size: 3vmin;
   text-align: center;
   width:15vmin;
   height: 4.5vmin;
 }
 .links6{
+  color: white;
   position: absolute;
   top:10.5vmin;
   right: 42vmin;
   margin-right: 1vmin;
   margin-bottom: 10vmin;
-  background-color: #dedede;
+  background-color: lightgrey;
   font-size: 3vmin;
   text-align: center;
   width:15vmin;
@@ -67,7 +72,8 @@ body {
 .SelectorAdmin{
   border-radius: 0vmin;
   border: 0px;
-  background-color: #dedede;
+  background-color: lightgrey;
+  color: black;
   font-size: 3vmin;
   text-align: center;
   padding-left: 2vmin;
@@ -80,15 +86,15 @@ body {
   right: 42vmin;
   margin-right: 1vmin;
   margin-bottom: 10vmin;
-  background-color: #dedede;
+  background-color: lightgrey;
   font-size: 3vmin;
   text-align: center;
   width:15vmin;
   height: 4.5vmin;
 }
 .linkText{
+  color: white;
   text-decoration: none;
-  color: black;
 }
 h1{
   text-align: center;

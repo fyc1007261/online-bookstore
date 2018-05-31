@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import '../../css/list.css';
 import $ from "jquery";
-import Modal from 'react-modal';
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader, ModalTitle} from 'react-bootstrap';
 import PropTypes from "prop-types";
 
 const customStyles = {
@@ -21,9 +21,7 @@ let data = [];
 
 function Msg (props) {
     let style = {
-        "border-radius": "2vmin",
         "width": "18vmin",
-        "backgroundColor": "lightgrey", /* Green */
         "border": "yellow",
         "color": "black ",
         "padding": "1vmin 2vmin",
@@ -33,14 +31,14 @@ function Msg (props) {
     };
     return (
         <table>
-            <th><button style={style} onClick={props.UsernameClick}>Username</button></th>
-            <th><button style={style} onClick={props.OrderIDClick}>Order ID</button></th>
-            <th><button style={style} onClick={props.NameClick}>Book</button></th>
-            <th><button style={style} onClick={props.AuthorClick}>Author</button></th>
-            <th><button style={style} onClick={props.CategoryClick}>Category</button></th>
-            <th><button style={style} onClick={props.AmountClick}>Amount</button></th>
-            <th><button style={style} onClick={props.PriceClick}>Price</button></th>
-            <th><button style={style} onClick={props.TimeClick}>Time</button></th>
+            <th><Button style={style} onClick={props.UsernameClick}>Username</Button></th>
+            <th><Button style={style} onClick={props.OrderIDClick}>Order ID</Button></th>
+            <th><Button style={style} onClick={props.NameClick}>Book</Button></th>
+            <th><Button style={style} onClick={props.AuthorClick}>Author</Button></th>
+            <th><Button style={style} onClick={props.CategoryClick}>Category</Button></th>
+            <th><Button style={style} onClick={props.AmountClick}>Amount</Button></th>
+            <th><Button style={style} onClick={props.PriceClick}>Price</Button></th>
+            <th><Button style={style} onClick={props.TimeClick}>Time</Button></th>
             <tbody>
             {props.value}
             </tbody>
@@ -74,8 +72,8 @@ class Export extends Component{
     render(){
         return(
             <a>
-                <button className={"savebutAdmin"} onClick={()=>this.saveJSON()}>Export JSON</button>
-                <button className={"savebut"} onClick={()=>this.saveCSV()}>Export CSV</button>
+                <Button bsStyle="info" className={"savebutAdmin"} onClick={()=>this.saveJSON()}>Export JSON</Button>
+                <Button bsStyle="info" className={"savebut"} onClick={()=>this.saveCSV()}>Export CSV</Button>
             </a>
         );
     }
@@ -84,7 +82,7 @@ class Export extends Component{
 class Tbl extends Component {
 
     openModal() {
-        this.setState({modalIsOpen: true});
+        this.setState({showModal: true});
     }
 
     afterOpenModal() {
@@ -93,7 +91,7 @@ class Tbl extends Component {
     }
 
     closeModal() {
-        this.setState({modalIsOpen: false});
+        this.setState({showModal: false});
     }
 
     constructor(props){
@@ -118,7 +116,7 @@ class Tbl extends Component {
         }
 
         this.state = {
-            modalIsOpen: false,
+            showModal:false,
             tableArray:tbls,
             totSales: sales,
             totPrice: price
@@ -281,7 +279,7 @@ class Tbl extends Component {
         return (
             <div className={"back"}>
                 <Export/>
-                <button className={"manageBut"} onClick={this.openModal}>Manage</button>
+                <Button bsStyle={"success"} className={"manageBut"} onClick={this.openModal}>Manage</Button>
                 <Msg value={this.state.tableArray} OrderIDClick={()=>this.OrderIDclick()}
                      NameClick={()=>this.Nameclick()} CategoryClick={()=>this.Categoryclick()}
                      PriceClick={()=>this.Priceclick()} AmountClick={()=>this.Amountclick()}
@@ -292,15 +290,17 @@ class Tbl extends Component {
                 <div className={"tot"}> Tot Sales:{this.state.totSales} </div>
                 <div className={"tot2"}>Tot Price:{this.state.totPrice}</div>
                 <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
-                    onRequestClose={this.closeModal}
-                    style={customStyles}
-                    contentLabel="Example Modal"
+                    show={this.state.showModal}
+                    onHide={this.closeModal}
                 >
-                    <h2 ref={subtitle => this.subtitle = subtitle}>Indent Stats</h2>
-                    <h3>Type in the constraints.</h3>
-                    <h3>The table may remain unchanged if none matches the constraints.</h3>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Indents stats
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <h4>Type in the constraints.</h4>
+                    <h4>The table may remain unchanged if none matches the constraints.</h4>
                     <form>
                         <br/>Username<br/><input id={"inputUsername"}/>
                         <br/>Author<br/> <input id={"inputAuthor"}/>
@@ -308,8 +308,11 @@ class Tbl extends Component {
                         <br/>Start time<br/> <input type={"datetime-local"} placeholder={"yy-mm-dd hh:mm:ss"} id={"inputStartTime"}/>
                         <br/>End time<br/> <input type={"datetime-local"} placeholder={"yy-mm-dd hh:mm:ss"} id={"inputEndTime"}/>
                     </form>
-                    <button onClick={()=>this.Filter(0)}>Submit</button>
-                    <button onClick={this.closeModal}>close</button>
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <Button onClick={()=>this.Filter(0)}>Submit</Button>
+                    <Button onClick={this.closeModal}>Close</Button>
+                    </Modal.Footer>
                 </Modal>
             </div>
         );

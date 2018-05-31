@@ -3,6 +3,7 @@ import {withRouter} from "react-router";
 import PropTypes from 'prop-types'
 import $ from 'jquery';
 
+import {Button} from 'react-bootstrap';
 
 import {setLogin} from "../index";
 import "../css/signup.css";
@@ -105,7 +106,7 @@ class Signup extends Component{
                     <input type={"text"} name={"Email"} id={"email"}/></div>
                     <br/><div className="property">Real Name
                     <input type={"text"} name={"RealName"} id={"realname"}/></div>
-                    <button onClick={()=>this.signUp()} className={"signupbut"} name={"Sign up now"}>Sign up</button>
+                    <Button bsSize={"large"} bsStyle={"info"} onClick={()=>this.signUp()} className={"signupbut"} name={"Sign up now"}>Sign up</Button>
                 </div>
             </div>
         )

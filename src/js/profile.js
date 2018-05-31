@@ -27,7 +27,7 @@ class Profile extends Component{
             alert("Network connection error.");
             return;
         }
-        if (message === "Not signed in"){
+        if (message === "Not logged in"){
             alert("Please login first");
             this.context.router.history.push('/login');
             return;
@@ -91,7 +91,7 @@ class Profile extends Component{
         }
 
         return(
-            <div>
+            <div className={"back"}>
                 <div className={"Info"}>
                     <h2>Your info:</h2>
                     <div className="index">Name:</div> <FormControl value={this.state.name} id={"name"} onChange={()=>this.changeProfile("name")}/>
