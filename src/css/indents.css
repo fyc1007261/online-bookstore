@@ -3,16 +3,16 @@
 }
 
 .bookFilter{
-
     margin-left: 30vmin;
 }
 
 .indentFilters{
-    border-radius: 2vmin;
     padding-left: 1vmin;
-    width: 20vmin;
-    margin-top: 2.5vmin;
+    margin-top: 2vmin;
     height: 3.6vmin;
-    margin-bottom: 0.4vmin;
     font-size: 3vmin;
+}
+.controlLabel{
+    font-size: 3vmin;
+    margin-top: 1.5vmin;
 }

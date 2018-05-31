@@ -37,34 +37,24 @@ table{
     margin-left: 20vmin;
     font-family: verdana,arial,sans-serif;
     font-size: 2.5vmin;
-    color:#333333;
-    border-color: #666666;
-    border-collapse: collapse;
     opacity: 1;
-    background-color: #d5f6ff;
+    background-color: white;
 }
 tr {
     border-width: 0.2vmin;
     padding: 1vmin;
-    border-style: solid;
-    border-color: #666666;
-    background-color: #dedede;
+    background-color: white;
     }
 td {
     text-align: left;
-    border-width: 0.2vmin;
     padding: 1vmin;
-    border-style: solid;
-    border-color: #666666;
-    background-color: #d5f6ff;
+    border-style: none;
+    background-color: white;
  }
 th {
     text-align: left;
-    border-width: 0.2vmin;
-    padding: 1vmin;
-    border-style: solid;
-    border-color: #666666;
-    background-color: #d5f6ff;
+    padding: 0;
+    background-color: white;
 }
 .nameFilter{
     margin-top: 2.5vmin;
@@ -74,29 +64,27 @@ th {
     text-align: center;
     float: left;
     width:20vmin;
-    height: 4.5vmin;
-    margin-left: 60vmin;
+    height: 6vmin;
+    margin-left: 50vmin;
+    margin-right: 1vmin;
 }
 .inputFilter{
     border-radius: 2vmin;
     padding-left: 1vmin;
     float: left;
-    width: 20vmin;
+    width: 30vmin;
     margin-top: 2.5vmin;
-    height: 3.6vmin;
+    margin-right: 1vmin;
+    height: 6vmin;
     margin-bottom: 0.4vmin;
     font-size: 3vmin;
 }
 .savebut{
     margin-top: 2.5vmin;
+    margin-left: 0.5vmin;
     width: 25vmin;
-    border-radius: 2vmin;
-    height: 4.5vmin;
-    backgroundColor: lightgrey;
-    border: yellow;
-    color: black;
+    height: 6vmin;
     align: center;
-    display: inline-block;
     font-size: 2.5vmin;
 }
 .savebutAdmin{
@@ -105,7 +93,6 @@ th {
     width: 25vmin;
     border-radius: 2vmin;
     height: 4.5vmin;
-    backgroundColor: lightgrey;
     border: yellow;
     color: black;
     align: center;
@@ -113,13 +100,15 @@ th {
     font-size: 2.5vmin;
 }
 .Selector{
-    border-radius: 2vmin;
-    background-color: #dedede;
+    border-radius: 1vmin;
+    color: white;
+    background-color: #5bc0de;
     font-size: 3vmin;
     text-align: center;
     padding-left: 2vmin;
+    margin-right: 3vmin;
     width:20vmin;
-    height: 4.5vmin;
+    height: 6vmin;
 }
 .viewBut{
     padding: 0.3vmin;
@@ -135,17 +124,12 @@ th {
 }
 
 .manageBut{
-    padding: 0.2vmin;
-    border-radius: 2vmin;
+    margin-top: 2.5vmin;
+    margin-left: 0.5vmin;
     width: 25vmin;
-    height: 4.5vmin;
-    backgroundColor: lightgrey;
-    border: yellow;
-    font-weight: bold;
-    color: black;
+    height: 6vmin;
     align: center;
-    display: inline-block;
-    font-size: 3vmin;
+    font-size: 2.5vmin;
 }
 .tot{
     margin-left: 60vmin;

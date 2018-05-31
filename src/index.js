@@ -98,7 +98,7 @@ class Title extends Component{
                             <option>--Stats</option>
                         </select>
                     </div>
-                    <h1>Online Bookstore</h1>
+                    <div className="title">Online Bookstore</div>
                 </div>
         )
     }

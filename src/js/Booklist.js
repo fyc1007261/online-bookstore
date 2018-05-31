@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import {Button} from 'react-bootstrap';
 
 import '../css/list.css';
 import $ from "jquery";
@@ -9,24 +10,23 @@ let data = [];
 
 function Msg (props) {
         let style = {
-            "border-radius": "2vmin",
+            "border-radius": "0",
             "width": "25vmin",
-            "backgroundColor": "lightgrey", /* Green */
             "border": "yellow",
             "color": "black ",
-            "padding": "1vmin 2vmin",
+            "padding": "1vmin 0vmin",
             "align": "center",
             "display": "inline-block",
             "font-size": "3vmin",
         };
         return (
             <table>
-                <th><button style={style} onClick={props.BookClick}>Book</button></th>
-                <th><button style={style} onClick={props.AuthorClick}>Author</button></th>
-                <th><button style={style} onClick={props.LangClick}>Language</button></th>
-                <th><button style={style} onClick={props.CategoryClick}>Category</button></th>
-                <th><button style={style} onClick={props.PriceClick}>Price</button></th>
-                <th><button style={style} onClick={props.SalesClick}>Sales</button></th>
+                <th><Button style={style} onClick={props.BookClick}>Book</Button></th>
+                <th><Button style={style} onClick={props.AuthorClick}>Author</Button></th>
+                <th><Button style={style} onClick={props.LangClick}>Language</Button></th>
+                <th><Button style={style} onClick={props.CategoryClick}>Category</Button></th>
+                <th><Button style={style} onClick={props.PriceClick}>Price</Button></th>
+                <th><Button style={style} onClick={props.SalesClick}>Sales</Button></th>
                 <tbody>
                 {props.value}
                 </tbody>
@@ -72,8 +72,8 @@ class Export extends Component{
     render(){
     return(
         <a>
-            <button className={"savebut"} onClick={()=>this.saveJSON()}>Export JSON</button>
-            <button className={"savebut"} onClick={()=>this.saveCSV()}>Export CSV</button>
+            <Button bsStyle={"info"} className={"savebut"} onClick={()=>this.saveJSON()}>Export JSON</Button>
+            <Button bsStyle={"info"} className={"savebut"} onClick={()=>this.saveCSV()}>Export CSV</Button>
         </a>
     );
     }
@@ -99,14 +99,14 @@ class Tbl extends Component {
                 <td>{temp['Category']}</td>
                 <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                 <td>{temp['Sales']}</td>
-                <td><button className="viewBut">
+                <td><Button className="viewBut">
                     <Link to={
                         {
                             pathname:"/purchase",
                             state:{id:temp['ID']}
                         }
                     }>View
-                    </Link></button>
+                    </Link></Button>
                 </td>
             </tr>);
             this.setState({tableArray:tbls});
@@ -236,14 +236,14 @@ class Tbl extends Component {
                     <td>{temp['Category']}</td>
                     <td>{(Number(temp['Price'])/100).toFixed(2)}</td>
                     <td>{temp['Sales']}</td>
-                    <td><button className="viewBut">
+                    <td><Button className="viewBut">
                         <Link to={
                             {
                                 pathname:"/purchase",
                                 state:{id:temp['ID']}
                             }
                         }>View
-                        </Link></button>
+                        </Link></Button>
                     </td>
                 </tr>);
                 this.setState({tableArray: tbls});

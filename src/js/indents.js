@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../css/indents.css';
 import {withRouter} from 'react-router'
 import $ from "jquery";
+import {Button, FormControl, ControlLabel, FormGroup, Form} from "react-bootstrap";
 
 class Indents extends Component {
     constructor() {
@@ -82,9 +83,7 @@ class Indents extends Component {
         let style = {
             "border-radius": "2vmin",
             "width": "25vmin",
-            "backgroundColor": "lightgrey", /* Green */
             "border": "yellow",
-            "color": "black ",
             "padding": "1vmin 2vmin",
             "align": "center",
             "display": "inline-block",
@@ -93,18 +92,30 @@ class Indents extends Component {
 
         return (
             <div className={"back"}>
-                <div className="bookFilter">
-                    Book name<input onChange={()=>this.change_filter()} id={"bookFilter"} className="indentFilters"/>
-                    Author <input onChange={()=>this.change_filter()} id={"authorFilter"} className="indentFilters"/>
-                    Create Time <input  onChange={()=>this.change_filter()} placeholder={"yyyy/mm/dd"} id={"timeFilter"} className="indentFilters"/>
-                </div>
+                <Form className="bookFilter" inline>
+                    <FormGroup>
+                        <ControlLabel className="controlLabel">Book name</ControlLabel>
+                        {''}
+                        <FormControl bsSize={"small"} onChange={()=>this.change_filter()} id={"bookFilter"} className="indentFilters"/>
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel className="controlLabel">Author</ControlLabel>
+                        {''}
+                        <FormControl onChange={()=>this.change_filter()} id={"authorFilter"} className="indentFilters"/>
+                    </FormGroup>
+                <FormGroup>
+                    <ControlLabel className="controlLabel">Create Time</ControlLabel>
+                    {''}
+                    <FormControl  onChange={()=>this.change_filter()} placeholder={"yyyy/mm/dd"} id={"timeFilter"} className="indentFilters"/>
+                </FormGroup>
+                </Form>
                 <table className={"indentTableCart"}>
-                    <th><button style={style}>Order ID</button></th>
-                    <th><button style={style}>Book</button></th>
-                    <th><button style={style}>Author</button></th>
-                    <th><button style={style}>Amount</button></th>
-                    <th><button style={style}>Price</button></th>
-                    <th><button style={style}>Time</button></th>
+                    <th><Button style={style}>Order ID</Button></th>
+                    <th><Button style={style}>Book</Button></th>
+                    <th><Button style={style}>Author</Button></th>
+                    <th><Button style={style}>Amount</Button></th>
+                    <th><Button style={style}>Price</Button></th>
+                    <th><Button style={style}>Time</Button></th>
                     <tbody id={"tbody"}>
                     {this.state.tableArray}
                     </tbody>

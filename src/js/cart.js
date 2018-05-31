@@ -3,6 +3,8 @@ import '../css/cart.css';
 import {withRouter} from 'react-router'
 import PropTypes from 'prop-types'
 
+import {Button} from 'react-bootstrap';
+
 import $ from "jquery";
 
 
@@ -115,9 +117,6 @@ class Cart extends Component {
         let style = {
             "border-radius": "2vmin",
             "width": "30vmin",
-            "backgroundColor": "lightgrey", /* Green */
-            "border": "yellow",
-            "color": "black ",
             "padding": "1vmin 2vmin",
             "align": "center",
             "display": "inline-block",
@@ -126,16 +125,16 @@ class Cart extends Component {
         return (
             <div className={"back"}>
                 <table className={"tableCart"}>
-                <th><button style={style}>Book</button></th>
-                <th><button style={style}>Author</button></th>
-                <th><button style={style}>Amount</button></th>
-                <th><button style={style}>Total Price</button></th>
+                <th><Button style={style}>Book</Button></th>
+                <th><Button style={style}>Author</Button></th>
+                <th><Button style={style}>Amount</Button></th>
+                <th><Button style={style}>Total Price</Button></th>
                 <tbody>
                 {this.state.tableArray}
                 </tbody>
                 </table>
                 <br/>
-                <button className="submitOrder" onClick={()=>this.submitOrder()}>Submit Order</button>
+                <Button bsStyle={"success"} className="submitOrder" onClick={()=>this.submitOrder()}>Submit Order</Button>
 
             </div>
         );

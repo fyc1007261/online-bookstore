@@ -93,3 +93,9 @@ body {
 h1{
   text-align: center;
 }
+.title{
+  font-size: 10vmin;
+  height: 20vmin;
+  text-align: center;
+  font-family: Arial;
+}

@@ -6,6 +6,8 @@ import {setLogin, isLogin} from "../index";
 import "../css/profile.css";
 import $ from "jquery";
 
+import {Button, FormControl} from 'react-bootstrap';
+
 
 class Profile extends Component{
     static contextTypes = {
@@ -92,14 +94,14 @@ class Profile extends Component{
             <div>
                 <div className={"Info"}>
                     <h2>Your info:</h2>
-                    <div className="index">Name:</div> <input value={this.state.name} id={"name"} onChange={()=>this.changeProfile("name")}/>
-                    <div className="index">Address:</div> <input value={this.state.address} id={"address"} onChange={()=>this.changeProfile("address")}/>
-                    <div className="index">Email:</div> <input value={this.state.email} id={"email"} onChange={()=>this.changeProfile("email")}/>
-                    <div className="index">Phone:</div> <input value={this.state.phone} id={"phone"} onChange={()=>this.changeProfile("phone")}/>
+                    <div className="index">Name:</div> <FormControl value={this.state.name} id={"name"} onChange={()=>this.changeProfile("name")}/>
+                    <div className="index">Address:</div> <FormControl value={this.state.address} id={"address"} onChange={()=>this.changeProfile("address")}/>
+                    <div className="index">Email:</div> <FormControl value={this.state.email} id={"email"} onChange={()=>this.changeProfile("email")}/>
+                    <div className="index">Phone:</div> <FormControl value={this.state.phone} id={"phone"} onChange={()=>this.changeProfile("phone")}/>
                 </div>
                 <div>
-                    <button className={"changeBut"} onClick={()=>this.submitChange()}>Submit</button>
-                    <button className={"logout"} onClick={()=>this.logout()}>Log out</button>
+                    <Button className={"changeBut"} onClick={()=>this.submitChange()}>Submit</Button>
+                    <Button className={"logout"} onClick={()=>this.logout()}>Log out</Button>
                 </div>
             </div>
         )

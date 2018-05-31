@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {withRouter} from "react-router";
 import PropTypes from 'prop-types'
 import $ from 'jquery';
-
+import {FormControl, Button} from 'react-bootstrap';
 
 import {isLogin, setLogin} from "../index";
 import "../css/login.css";
@@ -56,13 +56,11 @@ class Login extends Component{
             <div className={"back"}>
                 <div>
                     <div className={"inputs"}>
-                    <div>Username</div><input id={"username"}/>
-                    <div>Password</div><input type={"password"} id={"password"}/>
-
+                        <div>Username</div><FormControl className={"usnNpsw"} id={"username"}/>
+                        <div>Password</div><FormControl className={"usnNpsw"}  type={"password"} id={"password"}/>
                     <div>
-                        <button className={"loginbut"} onClick={()=>this.checkLogin()}>Login</button>
-                        <br/>
-                        <Link to={"/signup"}><button className={"signupbut"}>Sign up</button></Link>
+                        <Button bsSize="small" bsStyle="success" className={"loginbut"} onClick={()=>this.checkLogin()}>Login</Button>
+                        <Link to={"/signup"}><Button  bsSize="small" bsStyle="info" className={"signup"}>Sign Up</Button></Link>
                     </div>
                     </div>
                 </div>

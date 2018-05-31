@@ -4,6 +4,8 @@ import '../../css/list.css';
 import $ from "jquery";
 import Modal from 'react-modal';
 
+import {Button} from 'react-bootstrap';
+
 import PropTypes from "prop-types";
 
 const customStyles = {
@@ -24,7 +26,6 @@ function Msg (props) {
     let style = {
         "border-radius": "2vmin",
         "width": "25vmin",
-        "backgroundColor": "lightgrey", /* Green */
         "border": "yellow",
         "color": "black ",
         "padding": "1vmin 2vmin",
@@ -34,12 +35,12 @@ function Msg (props) {
     };
     return (
         <table>
-            <th><button style={style} onClick={props.UsernameClick}>Username</button></th>
-            <th><button style={style} onClick={props.NameClick}>Real name</button></th>
-            <th><button style={style} onClick={props.PhoneClick}>Phone</button></th>
-            <th><button style={style} onClick={props.EmailClick}>Email</button></th>
-            <th><button style={style} onClick={props.AddressClick}>Address</button></th>
-            <th><button style={style} onClick={props.ValidClick}>isValid</button></th>
+            <th><Button style={style} onClick={props.UsernameClick}>Username</Button></th>
+            <th><Button style={style} onClick={props.NameClick}>Real name</Button></th>
+            <th><Button style={style} onClick={props.PhoneClick}>Phone</Button></th>
+            <th><Button style={style} onClick={props.EmailClick}>Email</Button></th>
+            <th><Button style={style} onClick={props.AddressClick}>Address</Button></th>
+            <th><Button style={style} onClick={props.ValidClick}>isValid</Button></th>
             <tbody>
             {props.value}
             </tbody>
@@ -87,8 +88,8 @@ class Export extends Component{
     render(){
         return(
             <a>
-                <button className={"savebut"} onClick={()=>this.saveJSON()}>Export JSON</button>
-                <button className={"savebut"} onClick={()=>this.saveCSV()}>Export CSV</button>
+                <Button bsStyle="info" className={"savebut"} onClick={()=>this.saveJSON()}>Export JSON</Button>
+                <Button bsStyle="info" className={"savebut"} onClick={()=>this.saveCSV()}>Export CSV</Button>
             </a>
         );
     }
@@ -296,7 +297,7 @@ class Tbl extends Component {
                      AddressClick={()=>this.Addressclick()} PhoneClick={()=>this.Phoneclick()}
                      EmailClick={()=>this.Emailclick()} NameClick={()=>this.Nameclick()}
                 />
-                <button className={"manageBut"} onClick={this.openModal}>Manage</button>
+                <Button bsStyle="info" className={"manageBut"} onClick={this.openModal}>Manage</Button>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}

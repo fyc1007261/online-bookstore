@@ -46,15 +46,10 @@ th {
     float: left;
     margin-left: 75vmin;
     margin-top: 5vmin;
-    background-color: #dedede;
     font-size: 3vmin;
     text-align: center;
     width:55vmin;
     height: 5.5vmin;
-
     padding: 0.2vmin;
-    border-radius: 2vmin;
-    border: yellow;
-    color: black;
     display: inline-block;
 }

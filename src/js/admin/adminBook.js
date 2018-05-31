@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button} from 'react-bootstrap';
 
 import '../../css/list.css';
 import $ from "jquery";
@@ -23,7 +24,6 @@ function Msg (props) {
     let style = {
         "border-radius": "2vmin",
         "width": "22vmin",
-        "backgroundColor": "lightgrey", /* Green */
         "border": "yellow",
         "color": "black ",
         "padding": "1vmin 2vmin",
@@ -33,13 +33,13 @@ function Msg (props) {
     };
     return (
         <table>
-            <th><button style={style} onClick={props.IDClick}>BookID</button></th>
-            <th><button style={style} onClick={props.BookClick}>Book</button></th>
-            <th><button style={style} onClick={props.AuthorClick}>Author</button></th>
-            <th><button style={style} onClick={props.LangClick}>Language</button></th>
-            <th><button style={style} onClick={props.CategoryClick}>Category</button></th>
-            <th><button style={style} onClick={props.PriceClick}>Price</button></th>
-            <th><button style={style} onClick={props.InventoryClick}>Inventory</button></th>
+            <th><Button style={style} onClick={props.IDClick}>BookID</Button></th>
+            <th><Button style={style} onClick={props.BookClick}>Book</Button></th>
+            <th><Button style={style} onClick={props.AuthorClick}>Author</Button></th>
+            <th><Button style={style} onClick={props.LangClick}>Language</Button></th>
+            <th><Button style={style} onClick={props.CategoryClick}>Category</Button></th>
+            <th><Button style={style} onClick={props.PriceClick}>Price</Button></th>
+            <th><Button style={style} onClick={props.InventoryClick}>Inventory</Button></th>
             <tbody>
             {props.value}
             </tbody>
@@ -87,8 +87,8 @@ class Export extends Component{
     render(){
         return(
             <a>
-                <button className={"savebut"} onClick={()=>this.saveJSON()}>Export JSON</button>
-                <button className={"savebut"} onClick={()=>this.saveCSV()}>Export CSV</button>
+                <Button bsStyle="info" className={"savebut"} onClick={()=>this.saveJSON()}>Export JSON</Button>
+                <Button bsStyle="info" className={"savebut"} onClick={()=>this.saveCSV()}>Export CSV</Button>
             </a>
         );
     }
@@ -364,7 +364,7 @@ class Tbl extends Component {
                      InventoryClick={()=>this.Inventoryclick()} PriceClick={()=>this.Priceclick()}
                     IDClick={()=>this.IDClick()} CategoryClick={()=>this.CategoryClick()}
                 />
-                <button className={"manageBut"} onClick={this.openModal}>Manage</button>
+                <Button  bsStyle="success" className={"manageBut"} onClick={this.openModal}>Manage</Button>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
@@ -385,9 +385,9 @@ class Tbl extends Component {
                         <br/> new Inventory<br/><input id={"inputInventory"}/>
                         <br/> new Summary<br/> <input id={"inputSummary"}/>
                     </form>
-                    <button onClick={()=>this.modifyBook()}>Submit</button>
-                    <button onClick={()=>this.deleteBook()}>Delete this book</button>
-                    <button onClick={this.closeModal}>close</button>
+                    <Button onClick={()=>this.modifyBook()}>Submit</Button>
+                    <Button onClick={()=>this.deleteBook()}>Delete this book</Button>
+                    <Button onClick={this.closeModal}>close</Button>
                 </Modal>
             </div>
         );
