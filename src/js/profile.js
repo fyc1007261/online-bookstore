@@ -94,14 +94,14 @@ class Profile extends Component{
             <div className={"back"}>
                 <div className={"Info"}>
                     <h2>Your info:</h2>
-                    <div className="index">Name:</div> <FormControl value={this.state.name} id={"name"} onChange={()=>this.changeProfile("name")}/>
-                    <div className="index">Address:</div> <FormControl value={this.state.address} id={"address"} onChange={()=>this.changeProfile("address")}/>
-                    <div className="index">Email:</div> <FormControl value={this.state.email} id={"email"} onChange={()=>this.changeProfile("email")}/>
-                    <div className="index">Phone:</div> <FormControl value={this.state.phone} id={"phone"} onChange={()=>this.changeProfile("phone")}/>
+                    <div className="index">Name:</div> <FormControl className={"inputInfo"} value={this.state.name} id={"name"} onChange={()=>this.changeProfile("name")}/>
+                    <div className="index">Address:</div> <FormControl className={"inputInfo"} value={this.state.address} id={"address"} onChange={()=>this.changeProfile("address")}/>
+                    <div className="index">Email:</div> <FormControl className={"inputInfo"} value={this.state.email} id={"email"} onChange={()=>this.changeProfile("email")}/>
+                    <div className="index">Phone:</div> <FormControl className={"inputInfo"} value={this.state.phone} id={"phone"} onChange={()=>this.changeProfile("phone")}/>
                 </div>
                 <div>
-                    <Button className={"changeBut"} onClick={()=>this.submitChange()}>Submit</Button>
-                    <Button className={"logout"} onClick={()=>this.logout()}>Log out</Button>
+                    <Button bsStyle={"success"} className={"changeBut"} onClick={()=>this.submitChange()}>Submit</Button>
+                    <Button className={"changeBut"} onClick={()=>this.logout()}>Log out</Button>
                 </div>
             </div>
         )

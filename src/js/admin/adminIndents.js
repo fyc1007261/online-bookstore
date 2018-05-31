@@ -288,7 +288,7 @@ class Tbl extends Component {
                 />
 
                 <div className={"tot"}> Tot Sales:{this.state.totSales} </div>
-                <div className={"tot2"}>Tot Price:{this.state.totPrice}</div>
+                <div className={"tot2"}>Tot Price:{Number(this.state.totPrice).toFixed(2)}</div>
                 <Modal
                     show={this.state.showModal}
                     onHide={this.closeModal}
