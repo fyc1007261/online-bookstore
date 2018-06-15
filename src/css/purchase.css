@@ -14,7 +14,7 @@
     float:left;
     line-height: 8vmin;
 }
-.CustomerInfo{
+.Comments{
     font-size: 3vmin;
     margin-left: 45vmin;
     float: left;
@@ -34,8 +34,16 @@
 }
 .cancel{
     position: absolute;
+    bottom: 19.5vmin;
+    right: 42vmin;
+    vertical-align: center;
+    font-size: 3.5vmin;
+    text-align: center;
+}
+.comment{
+    position: absolute;
     bottom: 20vmin;
-    right: 40vmin;
+    right:60vmin;
     vertical-align: center;
     font-size: 3.5vmin;
     text-align: center;
